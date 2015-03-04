@@ -1,4 +1,4 @@
-package br.unisinos.jurimobile.adapter;
+package br.unisinos.jurimobile.view.adapter;
 
 import java.util.List;
 
@@ -8,26 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import br.unisinos.jurimobile.R;
-import br.unisinos.jurimobile.model.Processo;
+import br.unisinos.jurimobile.model.entity.Processo;
 
 public class ProcessoListAdapter extends RecyclerView.Adapter<ProcessoListAdapter.RecyclerViewHolder> {
 	
 	private List<Processo> processos;
 	
-	// Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        private TextView numeroProcesso;
+
+    	private TextView numeroProcesso;
+        private TextView participantes;
         
         public RecyclerViewHolder(View v) {
             super(v);
             numeroProcesso = (TextView) v.findViewById(R.id.numeroProcesso);
+            participantes = (TextView) v.findViewById(R.id.participantes);
         }
 
 		public TextView getNumeroProcesso() {
 			return numeroProcesso;
+		}
+
+		public TextView getParticipantes() {
+			return participantes;
 		}
 
     }
@@ -42,20 +45,17 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<ProcessoListAdapte
 		return processos.size();
 	}
 
-	// Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.getNumeroProcesso().setText(processos.get(position).getNumero());
+        Processo processo = processos.get(position);
+		holder.getNumeroProcesso().setText(processo.getNumero());
+        holder.getParticipantes().setText(processo.getNomesParticipantes());
 
     }
 
 	@Override
-	  public ProcessoListAdapter.RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		 // create a new view
+	  public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_processo_item, parent, false);
-        // set the view's size, margins, paddings and layout parameters
 		return new RecyclerViewHolder(view);
 	}
 
