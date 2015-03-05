@@ -8,7 +8,8 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#ff333333" />
+        android:background="@color/background_drawer" 
+        />
 
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
