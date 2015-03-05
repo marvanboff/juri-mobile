@@ -2,4 +2,13 @@
 
     <string name="app_name">JuriMobile</string>
 
+    <!-- strings.xml -->
+    <string-array name="drawer_options">
+        <item>Front End</item>
+        <item>Games</item>
+        <item>Java</item>
+        <item>Mobile</item>
+        <item>Web Development</item>
+    </string-array>
+
 </resources>

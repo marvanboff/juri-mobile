@@ -8,6 +8,11 @@
 package br.unisinos.jurimobile;
 
 public final class R {
+    public static final class array {
+        /**  strings.xml 
+         */
+        public static final int drawer_options=0x7f060000;
+    }
     public static final class attr {
     }
     public static final class color {
@@ -21,9 +26,11 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int lista_processo_recycler_view=0x7f070000;
-        public static final int numeroProcesso=0x7f070001;
-        public static final int participantes=0x7f070002;
+        public static final int drawer_layout=0x7f080000;
+        public static final int lista_processo_recycler_view=0x7f080002;
+        public static final int numeroProcesso=0x7f080003;
+        public static final int participantes=0x7f080004;
+        public static final int processos_drawer=0x7f080001;
     }
     public static final class layout {
         public static final int lista_processo=0x7f030000;
@@ -54,7 +61,7 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
-        public static final int AppTheme=0x7f060001;
+        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppTheme=0x7f070001;
     }
 }
