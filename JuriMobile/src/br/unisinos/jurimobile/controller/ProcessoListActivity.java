@@ -1,12 +1,16 @@
 package br.unisinos.jurimobile.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -14,8 +18,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.model.entity.Grupo;
 import br.unisinos.jurimobile.model.entity.GrupoProcesso;
@@ -26,7 +31,7 @@ import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter;
 public class ProcessoListActivity extends Activity {
 
 	private RecyclerView recyclerView;
-	private RecyclerView.Adapter<ProcessoListAdapter.RecyclerViewHolder> adapter;
+	private RecyclerView.Adapter<ProcessoListAdapter.RecyclerViewHolder> processoListAdapter;
 	private RecyclerView.LayoutManager layoutManager;
 
 	private DrawerLayout drawerLayout;
@@ -34,132 +39,147 @@ public class ProcessoListActivity extends Activity {
 	private ListView drawerList;
 
 	private ActionBarDrawerToggle drawerToggle;
-    private ActionBarHelper mActionBar;
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista_processo);
+		
+		//Recyclerview
 		recyclerView = (RecyclerView) findViewById(R.id.lista_processo_recycler_view);
-
 		recyclerView.setHasFixedSize(true);
 
 		layoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(layoutManager);
 
-		adapter = new ProcessoListAdapter(getMockProcessos());
-		recyclerView.setAdapter(adapter);
-
+		processoListAdapter = new ProcessoListAdapter(getMockProcessos());
+		recyclerView.setAdapter(processoListAdapter);
 		
-		options = getResources().getStringArray(R.array.drawer_options);
-
+		//Drawer
+//		options = getResources().getStringArray(R.array.drawer_options);
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerList = (ListView) findViewById(R.id.processos_drawer);
-		drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,options));
+		
+
+		String[] de = { "labelName" };
+		int[] para = { R.id.labelName };
+
+		SimpleAdapter adapter = new SimpleAdapter(this, getMockGrupos(), R.layout.processos_drawer_item, de, para);
+		drawerList.setAdapter(adapter);
+//		drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,options));
+		drawerList.setOnItemClickListener(new ProcessoDrawerItemClickListener());
+
+		//Drawer Action Bar Icon
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setTitle(getTitle());
 		
 		
-	   mActionBar = createActionBarHelper();
-       mActionBar.init();
-        
-       drawerToggle = new ActionBarDrawerToggle(
-                this,               
-                drawerLayout,       
-                R.drawable.ic_drawer,
-                R.string.drawer_open,  
-                R.string.drawer_close   
-                ) {
+		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-//				getSupportActionBar().setTitle("onDrawerClosed");
-//				supportInvalidateOptionsMenu();
+				  getActionBar().setTitle(getTitle());
+	              invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
-//				getSupportActionBar().setTitle("onDrawerOpened");
-//				supportInvalidateOptionsMenu();
+				getActionBar().setTitle(getTitle());
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
 			}
-        };
-        
-        drawerLayout.setDrawerListener(drawerToggle);
+		};
+
+		drawerLayout.setDrawerListener(drawerToggle);
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
+	}
+
+	/**
+	 * Mantém sincronização entre Navigation Drawer e a ActionBar
+	 */
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		drawerToggle.syncState();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		/*
+		 * The action bar home/up action should open or close the drawer.
+		 * mDrawerToggle will take care of this.
+		 */
+		if (drawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	/**
+	 * Mantém sincronização entre Navigation Drawer e a ActionBar
+	 */
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		drawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	private class ProcessoDrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
+
+		String title = "Teste";
+		
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			
+			
+			Fragment fragment = new ListFragment();
+			
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+			
+			setTitle(title);
+			((ProcessoListAdapter)processoListAdapter).setProcessos(getMockProcessos(getMockProcessos()));
+			drawerList.setItemChecked(position, true);
+			drawerLayout.closeDrawer(drawerList);
+		}
 		
 	}
 	
-	@Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-         * The action bar home/up action should open or close the drawer.
-         * mDrawerToggle will take care of this.
-         */
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
+	public List<Processo> getMockProcessos(List<Processo> processos) {
+		List<Processo> reducedList = new ArrayList<Processo>(processos);
+		reducedList.remove(1);
+		reducedList.remove(2);
+		return reducedList;
+	}
 	
 	public List<Processo> getMockProcessos() {
 		List<Processo> processos = new ArrayList<>();
 
 		// Ex: 9123782-66.2014.8.21.0033
-		processos.add(new Processo(1l, "9123782-66.2014.8.10.0023",
-				"Acidente de Transito", "Comarca de São Leopoldo",
-				"Aguardando Audiência"));
-		processos
-				.add(new Processo(2l, "9135782-22.2015.1.11.0055",
-						"Acidente de Transito", "Comarca de Canoas",
-						"Turmas Recursais"));
-		processos.add(new Processo(3l, "9165824-55.2014.12.21.0233",
-				"Acidente de Transito", "Comarca de Patenon", "Concluso"));
-		processos.add(new Processo(4l, "9165822-78.2014.6.1.8033",
-				"Acidente de Transito", "Comarca de Novo Hamburgo",
-				"Turmas Recursais"));
-		processos.add(new Processo(5l, "9165822-78.2014.6.1.8033",
-				"Cobrança Aluguel", "Comarca de Novo Hamburgo", "Baixado"));
+		processos.add(new Processo(1l, "9123782-66.2014.8.10.0023", "Acidente de Transito", "Comarca de São Leopoldo", "Aguardando Audiência"));
+		processos.add(new Processo(2l, "9135782-22.2015.1.11.0055", "Acidente de Transito", "Comarca de Canoas", "Turmas Recursais"));
+		processos.add(new Processo(3l, "9165824-55.2014.12.21.0233", "Acidente de Transito", "Comarca de Patenon", "Concluso"));
+		processos.add(new Processo(4l, "9165822-78.2014.6.1.8033", "Acidente de Transito", "Comarca de Novo Hamburgo", "Turmas Recursais"));
+		processos.add(new Processo(5l, "9165822-78.2014.6.1.8033", "Cobrança Aluguel", "Comarca de Novo Hamburgo", "Baixado"));
 
-		processos.get(0).addParticipante(
-				(new ProcessoParticipante(1l, "João Carlos")));
-		processos.get(0).addParticipante(
-				(new ProcessoParticipante(2l, "Maria Silva")));
-		processos.get(0).addParticipante(
-				(new ProcessoParticipante(12l, "Cleber dos Reis")));
-		processos.get(1).addParticipante(
-				(new ProcessoParticipante(3l, "Rafael Prereira")));
-		processos.get(1).addParticipante(
-				(new ProcessoParticipante(4l, "José Emanuel")));
-		processos.get(2).addParticipante(
-				(new ProcessoParticipante(5l, "Ricardo Fonseca")));
-		processos.get(2).addParticipante(
-				(new ProcessoParticipante(6l, "José Antunes")));
-		processos.get(3).addParticipante(
-				(new ProcessoParticipante(7l, "Carlos Reis da Silva")));
-		processos.get(3).addParticipante(
-				(new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
-		processos.get(3).addParticipante(
-				(new ProcessoParticipante(11l, "Emerson Silveira Flach")));
-		processos.get(3).addParticipante(
-				(new ProcessoParticipante(9l, "Joana Peixoto de Castro")));
-		processos.get(4).addParticipante(
-				(new ProcessoParticipante(10l, "Fernando Henrique Pereira")));
-		processos.get(4).addParticipante(
-				(new ProcessoParticipante(11l, "Jonas de Brito")));
-		processos.get(4).addParticipante(
-				(new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
+		processos.get(0).addParticipante((new ProcessoParticipante(1l, "João Carlos")));
+		processos.get(0).addParticipante((new ProcessoParticipante(2l, "Maria Silva")));
+		processos.get(0).addParticipante((new ProcessoParticipante(12l, "Cleber dos Reis")));
+		processos.get(1).addParticipante((new ProcessoParticipante(3l, "Rafael Prereira")));
+		processos.get(1).addParticipante((new ProcessoParticipante(4l, "José Emanuel")));
+		processos.get(2).addParticipante((new ProcessoParticipante(5l, "Ricardo Fonseca")));
+		processos.get(2).addParticipante((new ProcessoParticipante(6l, "José Antunes")));
+		processos.get(3).addParticipante((new ProcessoParticipante(7l, "Carlos Reis da Silva")));
+		processos.get(3).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
+		processos.get(3).addParticipante((new ProcessoParticipante(11l, "Emerson Silveira Flach")));
+		processos.get(3).addParticipante((new ProcessoParticipante(9l, "Joana Peixoto de Castro")));
+		processos.get(4).addParticipante((new ProcessoParticipante(10l, "Fernando Henrique Pereira")));
+		processos.get(4).addParticipante((new ProcessoParticipante(11l, "Jonas de Brito")));
+		processos.get(4).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
 
 		Grupo g1 = new Grupo(1l, "Reparação de Danos");
 		Grupo g2 = new Grupo(2l, "Dr. Francisco");
@@ -190,75 +210,27 @@ public class ProcessoListActivity extends Activity {
 		return processos;
 	}
 	
-	/** ACTION BAR */
-	
-	/**
-     * Create a compatible helper that will manipulate the action bar if available.
-     */
-    private ActionBarHelper createActionBarHelper() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            return new ActionBarHelperICS();
-        } else {
-            return new ActionBarHelper();
-        }
-    }
+	private List<Map<String, Object>> getMockGrupos(){
+		Grupo g1 = new Grupo(1l, "Reparação de Danos");
+		Grupo g2 = new Grupo(2l, "Dr. Francisco");
+		Grupo g3 = new Grupo(3l, "Recorrer");
+		Grupo g4 = new Grupo(4l, "Recurso Pendente");
+		Grupo g5 = new Grupo(5l, "Em Prazo");
+		
+		List<Map<String, Object>> grupos = new ArrayList<Map<String, Object>>();
+		addMap(g1, grupos);
+		addMap(g2, grupos);
+		addMap(g3, grupos);
+		addMap(g4, grupos);
+		addMap(g5, grupos);
+		
+		return grupos;
+	}
 
-    /**
-     * Stub action bar helper; this does nothing.
-     */
-    private class ActionBarHelper {
-        public void init() {}
-        public void onDrawerClosed() {}
-        public void onDrawerOpened() {}
-        public void setTitle(CharSequence title) {}
-    }
+	private void addMap(Grupo g1, List<Map<String, Object>> grupos) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("labelName", g1.getNome());
+		grupos.add(map);
+	}
 
-    /**
-     * Action bar helper for use on ICS and newer devices.
-     */
-    private class ActionBarHelperICS extends ActionBarHelper {
-        private final ActionBar mActionBar;
-        private CharSequence mDrawerTitle;
-        private CharSequence mTitle;
-
-        ActionBarHelperICS() {
-            mActionBar = getActionBar();
-        }
-
-        @Override
-        public void init() {
-            mActionBar.setDisplayHomeAsUpEnabled(true);
-            mActionBar.setHomeButtonEnabled(true);
-            mTitle = mDrawerTitle = getTitle();
-        }
-
-        /**
-         * When the drawer is closed we restore the action bar state reflecting
-         * the specific contents in view.
-         */
-        @Override
-        public void onDrawerClosed() {
-            super.onDrawerClosed();
-            mActionBar.setTitle(mTitle);
-        }
-
-        /**
-         * When the drawer is open we set the action bar to a generic title.
-         * The action bar should only contain data relevant at the top level of
-         * the nav hierarchy represented by the drawer, as the rest of your content
-         * will be dimmed down and non-interactive.
-         */
-        @Override
-        public void onDrawerOpened() {
-            super.onDrawerOpened();
-            mActionBar.setTitle(mDrawerTitle);
-        }
-
-        @Override
-        public void setTitle(CharSequence title) {
-            mTitle = title;
-        }
-    }
-	
-	
 }

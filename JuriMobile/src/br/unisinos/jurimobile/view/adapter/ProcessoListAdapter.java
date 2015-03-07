@@ -11,19 +11,19 @@ import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.model.entity.Processo;
 
 public class ProcessoListAdapter extends RecyclerView.Adapter<ProcessoListAdapter.RecyclerViewHolder> {
-	
-	private List<Processo> processos;
-	
-    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    	private TextView numeroProcesso;
-        private TextView participantes;
-        
-        public RecyclerViewHolder(View v) {
-            super(v);
-            numeroProcesso = (TextView) v.findViewById(R.id.numeroProcesso);
-            participantes = (TextView) v.findViewById(R.id.participantes);
-        }
+	private List<Processo> processos;
+
+	public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+
+		private TextView numeroProcesso;
+		private TextView participantes;
+
+		public RecyclerViewHolder(View v) {
+			super(v);
+			numeroProcesso = (TextView) v.findViewById(R.id.numeroProcesso);
+			participantes = (TextView) v.findViewById(R.id.participantes);
+		}
 
 		public TextView getNumeroProcesso() {
 			return numeroProcesso;
@@ -33,29 +33,38 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<ProcessoListAdapte
 			return participantes;
 		}
 
-    }
-	
-    public ProcessoListAdapter(List<Processo> processos) {
-    	super();
-    	setProcessos(processos);
 	}
-    
+
+	public ProcessoListAdapter(List<Processo> processos) {
+		super();
+		setProcessos(processos);
+	}
+
 	@Override
 	public int getItemCount() {
 		return processos.size();
 	}
 
-    @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        Processo processo = processos.get(position);
+	@Override
+	public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+		Processo processo = processos.get(position);
 		holder.getNumeroProcesso().setText(processo.getNumero());
-        holder.getParticipantes().setText(processo.getNomesParticipantes());
+		holder.getParticipantes().setText(processo.getNomesParticipantes());
 
-    }
+	}
 
 	@Override
-	  public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_processo_item, parent, false);
+		/*
+		 * view.setOnClickListener(new android.view.View.OnClickListener(){
+		 * 
+		 * @Override public void onClick(View v) { // Toast.makeText(contexto,
+		 * "Funcionou!", Toast.LENGTH_SHORT).show(); }
+		 * 
+		 * 
+		 * });
+		 */
 		return new RecyclerViewHolder(view);
 	}
 
@@ -66,5 +75,5 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<ProcessoListAdapte
 	public void setProcessos(List<Processo> processos) {
 		this.processos = processos;
 	}
-	
+
 }
