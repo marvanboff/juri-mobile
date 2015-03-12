@@ -1,7 +1,6 @@
 package br.unisinos.jurimobile.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -26,12 +26,14 @@ import br.unisinos.jurimobile.model.entity.Grupo;
 import br.unisinos.jurimobile.model.entity.GrupoProcesso;
 import br.unisinos.jurimobile.model.entity.Processo;
 import br.unisinos.jurimobile.model.entity.ProcessoParticipante;
+import br.unisinos.jurimobile.model.entity.TipoParticipante;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter;
+import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter.ClickListener;
 
-public class ProcessoListActivity extends Activity {
+public class ProcessoListActivity extends Activity implements ClickListener{
 
 	private RecyclerView recyclerView;
-	private RecyclerView.Adapter<ProcessoListAdapter.RecyclerViewHolder> processoListAdapter;
+	private RecyclerView.Adapter<RecyclerView.ViewHolder> processoListAdapter;
 	private RecyclerView.LayoutManager layoutManager;
 
 	private DrawerLayout drawerLayout;
@@ -53,6 +55,8 @@ public class ProcessoListActivity extends Activity {
 		recyclerView.setLayoutManager(layoutManager);
 
 		processoListAdapter = new ProcessoListAdapter(getMockProcessos());
+		((ProcessoListAdapter)processoListAdapter).setClickListener(this);
+		
 		recyclerView.setAdapter(processoListAdapter);
 		
 		//Drawer
@@ -96,7 +100,14 @@ public class ProcessoListActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 	}
-
+	
+	@Override
+	public void onClick(View view, Long itemId) {
+		Intent intent = new Intent(this, ProcessoActivity.class);
+		intent.putExtra(ProcessoActivity.NAME_PARAMETER_ID_PROCESSO, itemId);
+		startActivity(intent);
+	}
+	
 	/**
 	 * Mantém sincronização entre Navigation Drawer e a ActionBar
 	 */
@@ -136,7 +147,6 @@ public class ProcessoListActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			
-			
 			Fragment fragment = new ListFragment();
 			
 			getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -156,30 +166,30 @@ public class ProcessoListActivity extends Activity {
 		return reducedList;
 	}
 	
-	public List<Processo> getMockProcessos() {
+	public static List<Processo> getMockProcessos() {
 		List<Processo> processos = new ArrayList<>();
 
 		// Ex: 9123782-66.2014.8.21.0033
-		processos.add(new Processo(1l, "9123782-66.2014.8.10.0023", "Acidente de Transito", "Comarca de São Leopoldo", "Aguardando Audiência"));
-		processos.add(new Processo(2l, "9135782-22.2015.1.11.0055", "Acidente de Transito", "Comarca de Canoas", "Turmas Recursais"));
-		processos.add(new Processo(3l, "9165824-55.2014.12.21.0233", "Acidente de Transito", "Comarca de Patenon", "Concluso"));
-		processos.add(new Processo(4l, "9165822-78.2014.6.1.8033", "Acidente de Transito", "Comarca de Novo Hamburgo", "Turmas Recursais"));
-		processos.add(new Processo(5l, "9165822-78.2014.6.1.8033", "Cobrança Aluguel", "Comarca de Novo Hamburgo", "Baixado"));
+		processos.add(new Processo(1l, "9123782-66.2014.8.10.0023", "Acidente de Transito", "Juizado Especial Cívil", "São Leopoldo", "Aguardando Audiência"));
+		processos.add(new Processo(2l, "9135782-22.2015.1.11.0055", "Acidente de Transito", "2ª Vara Cível", "Canoas", "Turmas Recursais"));
+		processos.add(new Processo(3l, "9165824-55.2014.12.21.0233", "Acidente de Transito", "10º Juizado Especial Cível", "Porto Alegre", "Concluso"));
+		processos.add(new Processo(4l, "9165822-78.2014.6.1.8033", "Acidente de Transito", "Vara JEC", "Novo Hamburgo", "Turmas Recursais"));
+		processos.add(new Processo(5l, "9165822-78.2014.6.1.8033", "Cobrança Aluguel", "2ª Vara Cível", "Novo Hamburgo", "Baixado"));
 
-		processos.get(0).addParticipante((new ProcessoParticipante(1l, "João Carlos")));
-		processos.get(0).addParticipante((new ProcessoParticipante(2l, "Maria Silva")));
-		processos.get(0).addParticipante((new ProcessoParticipante(12l, "Cleber dos Reis")));
-		processos.get(1).addParticipante((new ProcessoParticipante(3l, "Rafael Prereira")));
-		processos.get(1).addParticipante((new ProcessoParticipante(4l, "José Emanuel")));
-		processos.get(2).addParticipante((new ProcessoParticipante(5l, "Ricardo Fonseca")));
-		processos.get(2).addParticipante((new ProcessoParticipante(6l, "José Antunes")));
-		processos.get(3).addParticipante((new ProcessoParticipante(7l, "Carlos Reis da Silva")));
-		processos.get(3).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
-		processos.get(3).addParticipante((new ProcessoParticipante(11l, "Emerson Silveira Flach")));
-		processos.get(3).addParticipante((new ProcessoParticipante(9l, "Joana Peixoto de Castro")));
-		processos.get(4).addParticipante((new ProcessoParticipante(10l, "Fernando Henrique Pereira")));
-		processos.get(4).addParticipante((new ProcessoParticipante(11l, "Jonas de Brito")));
-		processos.get(4).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos")));
+		processos.get(0).addParticipante((new ProcessoParticipante(1l, "João Carlos", "Autor", TipoParticipante.A)));
+		processos.get(0).addParticipante((new ProcessoParticipante(2l, "Maria Silva", "Autor", TipoParticipante.A)));
+		processos.get(0).addParticipante((new ProcessoParticipante(12l, "Cleber dos Reis", "Réu", TipoParticipante.P)));
+		processos.get(1).addParticipante((new ProcessoParticipante(3l, "Rafael Prereira", "Autor", TipoParticipante.A)));
+		processos.get(1).addParticipante((new ProcessoParticipante(4l, "José Emanuel", "Réu", TipoParticipante.P)));
+		processos.get(2).addParticipante((new ProcessoParticipante(5l, "Ricardo Fonseca", "Autor", TipoParticipante.A)));
+		processos.get(2).addParticipante((new ProcessoParticipante(6l, "José Antunes", "Réu", TipoParticipante.P)));
+		processos.get(3).addParticipante((new ProcessoParticipante(7l, "Carlos Reis da Silva", "Autor", TipoParticipante.A)));
+		processos.get(3).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos", "Testemunha", TipoParticipante.O)));
+		processos.get(3).addParticipante((new ProcessoParticipante(11l, "Emerson Silveira Flach", "Réu", TipoParticipante.P)));
+		processos.get(3).addParticipante((new ProcessoParticipante(9l, "Joana Peixoto de Castro", "Réu", TipoParticipante.P)));
+		processos.get(4).addParticipante((new ProcessoParticipante(10l, "Fernando Henrique Pereira", "Autor", TipoParticipante.A)));
+		processos.get(4).addParticipante((new ProcessoParticipante(11l, "Jonas de Brito", "Réu", TipoParticipante.P)));
+		processos.get(4).addParticipante((new ProcessoParticipante(8l, "Fabiano Pereira Campos", "Testemunha", TipoParticipante.O)));
 
 		Grupo g1 = new Grupo(1l, "Reparação de Danos");
 		Grupo g2 = new Grupo(2l, "Dr. Francisco");

@@ -10,19 +10,22 @@ public class Processo {
 	private String assunto;
 	private String juizado;
 	private String estadoProcesso;
+	private String comarca;
 	private List<ProcessoParticipante> participantes;
 	private List<GrupoProcesso> grupos;
+	private List<ProcessoMovimento> movimentacoes;
 	
 	public Processo() {
 		super();
 	}
 
-	public Processo(Long id, String numero, String assunto, String juizado, String estadoProcesso) {
+	public Processo(Long id, String numero, String assunto, String juizado, String comarca, String estadoProcesso) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.assunto = assunto;
 		this.juizado = juizado;
+		this.comarca = comarca;
 		this.estadoProcesso = estadoProcesso;
 	}
 	
@@ -109,4 +112,19 @@ public class Processo {
 		this.grupos = grupos;
 	}
 
+	public String getComarca() {
+		return comarca;
+	}
+
+	public void setComarca(String comarca) {
+		this.comarca = comarca;
+	}
+
+	public List<ProcessoMovimento> getMovimentacoes() {
+		return movimentacoes;
+	}
+
+	public void setMovimentacoes(List<ProcessoMovimento> movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
 }

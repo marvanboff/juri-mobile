@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_drawer"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/numeroProcesso"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/secundaryText"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/estadoProcesso"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/secundaryText"
+        android:paddingTop="4dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="@color/divisors" />
+
+    <ListView
+        android:id="@+id/lista_participantes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/titleMovimentacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/ultimas_movimentacoes"
+        android:textColor="@color/secundaryText"
+        android:paddingTop="20dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="@color/divisors" />
+
+    <ListView android:id="@+id/movimentacoes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    
+</LinearLayout>

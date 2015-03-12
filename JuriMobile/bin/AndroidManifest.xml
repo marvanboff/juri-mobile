@@ -21,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="br.unisinos.jurimobile.controller.ProcessoActivity"
+            android:label="@string/processo" >
+        </activity>
+        <activity
+            android:name="br.unisinos.jurimobile.controller.MovimentoActivity"
+            android:label="@string/movimento" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,5 +14,8 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="meusProcessos">Meus Processos</string>
+    <string name="processo">Processo</string>
+    <string name="ultimas_movimentacoes">Últimas Movimentações</string>
+    <string name="movimento">Movimentações</string>
 
 </resources>
