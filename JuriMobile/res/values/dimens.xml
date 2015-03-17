@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="eight">8dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+     
+    <dimen name="padding_twenty">@dimen/twenty</dimen>
+    <dimen name="padding_eight">@dimen/eight</dimen>
+    <dimen name="drawer_menu_width">240dp</dimen>
+</resources>

@@ -98,7 +98,7 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 			return new EmptyViewHolder(view); 
 		}
 
-		view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_processo_item, parent, false);
+		view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_processos_item, parent, false);
 		RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
 		recyclerViewHolder.setClickListener(getClickListener());
 		return recyclerViewHolder;

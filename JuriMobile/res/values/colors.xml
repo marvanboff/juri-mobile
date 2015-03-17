@@ -2,12 +2,14 @@
 <resources>
 
     <color name="accent">#C5CAE9</color>
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#1A237E</color>
+    <color name="primary">#304FFE</color>
+    <color name="primaryDark">#283593</color>
     <color name="divisors">#1A237E</color>
     <color name="background">#E8EAF6</color>
     <color name="background_drawer">#FFFFFF</color>
+    <color name="textColorPrimary">@android:color/white</color>
     <color name="secundaryText">#000000</color>
     <color name="subText">#757575</color>
+    <color name="theme_dialer_primary">#3F51B5</color>
 
 </resources>

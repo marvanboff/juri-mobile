@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
@@ -18,7 +22,7 @@ import br.unisinos.jurimobile.model.entity.Processo;
 import br.unisinos.jurimobile.model.entity.ProcessoMovimento;
 import br.unisinos.jurimobile.model.entity.ProcessoParticipante;
 
-public class ProcessoActivity extends Activity{
+public class ProcessoActivity extends ActionBarActivity{
 
 	public final static String NAME_PARAMETER_ID_PROCESSO = "processo_id";
 	
@@ -28,8 +32,11 @@ public class ProcessoActivity extends Activity{
 		setContentView(R.layout.processo);
 		
 		Long idProcesso = this.getIntent().getExtras().getLong(NAME_PARAMETER_ID_PROCESSO);
-//		Long idProcesso = null;
 		Processo processo = getProcesso(idProcesso);
+		
+		Toolbar toolBar = (Toolbar) findViewById(R.id.processo_toolbar);
+		setSupportActionBar(toolBar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		TextView numeroProcesso = (TextView) findViewById(R.id.numeroProcesso);
 		TextView estadoProcesso = (TextView) findViewById(R.id.estadoProcesso);
@@ -41,7 +48,7 @@ public class ProcessoActivity extends Activity{
 		
 		TextView titleMovimentacoes = (TextView) findViewById(R.id.titleMovimentacoes);
 		titleMovimentacoes.setOnClickListener(new OnClickListener(){
-
+			
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(getApplicationContext(), MovimentoActivity.class));
@@ -50,7 +57,39 @@ public class ProcessoActivity extends Activity{
 		});
 		
 	}
+	
+	//TODO Colocar em uma interface, ou base activity
+	public Intent getAplicationParentActivityIntent() {
+		return new Intent(this, ProcessoListActivity.class);
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        Intent upIntent = NavUtils.getParentActivityIntent(this);
+	        if(upIntent == null){
+	        	upIntent = getAplicationParentActivityIntent();
+	        }
+	        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+	            // This activity is NOT part of this app's task, so create a new task
+	            // when navigating up, with a synthesized back stack.
+	            TaskStackBuilder.create(this)
+	                    // Add all of this activity's parents to the back stack
+	                    .addNextIntentWithParentStack(upIntent)
+	                    // Navigate up to the closest parent
+	                    .startActivities();
+	        } else {
+	            // This activity is part of this app's task, so simply
+	            // navigate up to the logical parent activity.
+	            NavUtils.navigateUpTo(this, upIntent);
+	        }
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
 	private void loadListMovimentacao(List<ProcessoMovimento> mockMovimentacao) {
 		String[] de = { "descricaoMovimento" };
 		int[] para = { R.id.descricaoMovimento};

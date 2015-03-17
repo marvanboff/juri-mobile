@@ -17,5 +17,6 @@
     <string name="processo">Processo</string>
     <string name="ultimas_movimentacoes">Últimas Movimentações</string>
     <string name="movimento">Movimentações</string>
-
+    <string name="drawerMenuTitle">Grupos</string>
+	
 </resources>

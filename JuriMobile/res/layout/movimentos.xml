@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:textColor="@color/secundaryText"
         android:textSize="16sp" 
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:padding="4dp"
         />
 
 </LinearLayout>

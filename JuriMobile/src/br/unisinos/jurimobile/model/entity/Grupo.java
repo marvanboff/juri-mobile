@@ -1,9 +1,13 @@
 package br.unisinos.jurimobile.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grupo {
 
 	private Long id;
 	private String nome;
+	private List<Processo> processos;
 
 	public Grupo() {
 		super();
@@ -14,7 +18,14 @@ public class Grupo {
 		this.id = id;
 		this.nome = nome;
 	}
-
+	
+	public boolean addProcesso(Processo processo){
+		if(processos == null){
+			processos = new ArrayList<Processo>();
+		}
+		return processos.add(processo);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,4 +42,11 @@ public class Grupo {
 		this.nome = nome;
 	}
 
+	public List<Processo> getProcessos() {
+		return processos;
+	}
+
+	public void setProcessos(List<Processo> processos) {
+		this.processos = processos;
+	}
 }
