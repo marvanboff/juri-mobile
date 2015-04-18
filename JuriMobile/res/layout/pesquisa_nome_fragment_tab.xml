@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/inputNome"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="@string/nomeAutorReu"
+        android:inputType="textPersonName"
+        android:maxLength="60"
+        android:textColorHighlight="@color/primary"
+        android:textColor="@color/black" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/pesquisar"
+        android:textColor="@color/textColorPrimary" />
+
+</LinearLayout>
