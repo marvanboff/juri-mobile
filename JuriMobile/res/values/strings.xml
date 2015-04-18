@@ -18,5 +18,11 @@
     <string name="ultimas_movimentacoes">Últimas Movimentações</string>
     <string name="movimento">Movimentações</string>
     <string name="drawerMenuTitle">Grupos</string>
+    <string name="pesquisa_processo">Pesquisa</string>
+    <string name="nome">Nome</string>
+    <string name="nProcesso">Nº Pecesso</string>
+    <string name="nomeAutorReu">Nome do Autor ou Réu</string>
+    <string name="numeroProcesso">Número do Processo</string>
+    <string name="pesquisar">Pesquisar</string>
 	
 </resources>

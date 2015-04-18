@@ -15,11 +15,6 @@
         <activity
             android:name="br.unisinos.jurimobile.controller.ProcessoListActivity"
             android:label="@string/meusProcessos" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="br.unisinos.jurimobile.controller.ProcessoActivity"
@@ -28,6 +23,15 @@
         <activity
             android:name="br.unisinos.jurimobile.controller.MovimentoActivity"
             android:label="@string/movimento" >
+        </activity>
+        <activity
+            android:name="br.unisinos.jurimobile.controller.PesquisaProcessoActivity"
+            android:label="@string/pesquisa_processo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

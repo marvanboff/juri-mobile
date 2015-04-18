@@ -11,5 +11,8 @@
     <color name="secundaryText">#000000</color>
     <color name="subText">#757575</color>
     <color name="theme_dialer_primary">#3F51B5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    
 
 </resources>
