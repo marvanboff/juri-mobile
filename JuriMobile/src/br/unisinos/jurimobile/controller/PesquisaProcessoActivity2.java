@@ -31,9 +31,18 @@ public class PesquisaProcessoActivity2 extends FragmentActivity {
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(new TabPesquisaProcessoAdapter(getSupportFragmentManager()));
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        
+//        mSlidingTabLayout.setCustomTabView(R.layout.pesquisa_processo_tabs, Arrays.asList(R.id.tabNome, R.id.tabNumeroProcesso));
+        mSlidingTabLayout.setCustomTabView(R.layout.pesquisa_processo_tabs, R.id.tabModel); 
+        mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.primary));
+        mSlidingTabLayout.setCustomTabColorizer(new PesquisarProcessoTabColorizer());
+        mSlidingTabLayout.setDistributeEvenly(true);
+        
         mSlidingTabLayout.setViewPager(mViewPager);
-//        mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.primary));
-//        mSlidingTabLayout.setCustomTabColorizer(new PesquisarProcessoTabColorizer());
+        
+//        mSlidingTabLayout.setDividerColors(getResources().getColor(R.color.primaryDark));
+//        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.primaryDark));
+        
         
 		// Locate the viewpager in activity_main.xml
 //		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -44,7 +53,7 @@ public class PesquisaProcessoActivity2 extends FragmentActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.processo_toolbar);
 
 		addToolbar(toolbar);
-
+		
 		Drawable backArrowDrawble = alterarCorBotaoVoltar();
 		Drawable menuDrawble = alterarCorBotaoMenu();
 		
@@ -52,6 +61,7 @@ public class PesquisaProcessoActivity2 extends FragmentActivity {
 		if (toolbar != null) {
 
 			toolbar.setNavigationIcon(backArrowDrawble);
+			
 			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -94,12 +104,7 @@ public class PesquisaProcessoActivity2 extends FragmentActivity {
 	
 		@Override
 		public int getIndicatorColor(int position) {
-			return getResources().getColor(R.color.textColorPrimary);
-		}
-		
-		@Override
-		public int getDividerColor(int position) {
-			return R.color.textColorPrimary;
+			return getResources().getColor(R.color.indicadorColor);
 		}
 		
 	}

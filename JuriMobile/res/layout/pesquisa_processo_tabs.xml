@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabModel"
+    android:layout_width="wrap_content"
+    android:layout_height="56dp"
+    android:background="?android:selectableItemBackground"
+    android:gravity="center"
+    android:maxWidth="264dp"
+    android:minWidth="160dp"
+    android:paddingLeft="12dp"
+    android:textColor="@color/white"
+    android:textSize="16sp"
+    android:textStyle="bold" />
