@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/background_drawer"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/processo_toolbar"
+        android:id="@+id/resultado_pesquisa_processo_toolbar"
         style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:minHeight="?attr/actionBarSize"
         tools:context=".ToolBar" />
 
-    <br.unisinos.jurimobile.view.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
+    <fragment
+        android:id="@+id/lista_resultado_processo_recycler_view"
+        android:name="br.unisinos.jurimobile.view.fragment.RecyclerViewResultadoPesquisaProcessosFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        android:background="@android:color/white" />
+        android:layout_height="match_parent"
+        tools:context=".RecyclerView"
+        tools:layout="@layout/fragment_recycler_resultado_processos_item" >
+    </fragment>
 
 </LinearLayout>

@@ -14,6 +14,7 @@
         android:inputType="textPersonName"
         android:maxLength="60"
         android:textColor="@color/black"
+        android:textColorHint="@color/subText"
         android:textColorHighlight="@color/primary" />
 
     <Button

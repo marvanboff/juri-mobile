@@ -9,8 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import android.view.MenuItem;
 import android.view.View;
 import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.model.entity.Grupo;
@@ -20,17 +21,13 @@ import br.unisinos.jurimobile.model.entity.TipoParticipante;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter.ClickListener;
 import br.unisinos.jurimobile.view.fragment.FragmentCallBack;
 import br.unisinos.jurimobile.view.fragment.NavigationDrawerFragment;
-import br.unisinos.jurimobile.view.fragment.RecyclerViewFragment;
+import br.unisinos.jurimobile.view.fragment.RecyclerViewMeusProcessosFragment;
 
 public class ProcessoListActivity extends ActionBarActivity implements ClickListener, FragmentCallBack {
 
-	private RecyclerView recyclerView;
-	private RecyclerView.Adapter<RecyclerView.ViewHolder> processoListAdapter;
-	private RecyclerView.LayoutManager layoutManager;
-
 	private Toolbar toolBar;
 	private NavigationDrawerFragment navigationDrawerFragment;
-	private RecyclerViewFragment recyclerViewFragment;
+	private RecyclerViewMeusProcessosFragment recyclerViewFragment;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -38,11 +35,13 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		setContentView(R.layout.lista_processo);
 		
 		toolBar = (Toolbar) findViewById(R.id.lista_processo_toolbar);
-		setSupportActionBar(toolBar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		toolBar.setTitle(R.string.meusProcessos);
+//		setSupportActionBar(toolBar);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		
+		addMenuToolbar(toolBar);
 		loadViewComponents();
-		loadInfoToolbar();
 		loadInfoDrawerMenu();
 		
 		// Recyclerview
@@ -70,9 +69,24 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		
 		
 	}
+	
+	private void addMenuToolbar(Toolbar toolBar) {
+		toolBar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem itemMenu) {
+				startActivity(new MenuIntent().resolve(getApplicationContext(), itemMenu));
+				return true;
+			}
+		});
+
+		toolBar.inflateMenu(R.menu.navigation_menu);
+		toolBar.getMenu().removeItem(R.id.meus_processos_item_menu);
+	}
+
 
 	private void loadViewComponents() {
-		recyclerViewFragment = (RecyclerViewFragment) getSupportFragmentManager().findFragmentById(R.id.lista_processo_recycler_view);
+		recyclerViewFragment = (RecyclerViewMeusProcessosFragment) getSupportFragmentManager().findFragmentById(R.id.lista_processo_recycler_view);
 		navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.grupos_processo_navigation_drawer);
 		
 		navigationDrawerFragment.registerCallBack(this);
@@ -90,15 +104,6 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		
 	}
 
-	private void loadInfoToolbar() {
-//		toolBar.inflateMenu(R.id.screen_default_toolbar);
-//		setSupportActionBar(toolBar);
-//		toolBar.setEnabled(true);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//		getSupportActionBar().setHomeButtonEnabled(true);
-//		getSupportActionBar().setTitle("Teste title");
-	}
-	
 	private void loadInfoDrawerMenu() {
 		navigationDrawerFragment.setUp(R.id.content_frame_drawer, (DrawerLayout) findViewById(R.id.processos_drawer_layout), toolBar);
 	}

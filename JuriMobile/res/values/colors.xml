@@ -14,6 +14,9 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="indicadorColor">#FFEA00</color>
-    
+    <color name="favorite">#FAC12F</color>
+    <color name="background_list">#FDFDFD</color>
+    <color name="background_list_content">#FFFFFF</color>
+    <color name="background_divider_list">#E8EAF6</color>
 
 </resources>

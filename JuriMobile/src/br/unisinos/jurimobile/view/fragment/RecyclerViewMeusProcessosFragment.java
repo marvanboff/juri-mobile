@@ -17,9 +17,7 @@ import br.unisinos.jurimobile.model.entity.Processo;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter.ClickListener;
 
-public class RecyclerViewFragment extends Fragment {
-
-	private static final String TAG = RecyclerViewFragment.class.getSimpleName();
+public class RecyclerViewMeusProcessosFragment extends Fragment {
 
 	protected Context context;
 	protected Activity activity;
@@ -29,7 +27,7 @@ public class RecyclerViewFragment extends Fragment {
 	private RecyclerView.LayoutManager layoutManager;
 	
 
-	public RecyclerViewFragment() {
+	public RecyclerViewMeusProcessosFragment() {
 		super();
 	}
 

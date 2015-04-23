@@ -6,14 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -26,6 +31,9 @@ public class ProcessoActivity extends ActionBarActivity{
 
 	public final static String NAME_PARAMETER_ID_PROCESSO = "processo_id";
 	
+	private Toolbar toolBar;
+	private List<ProcessoMovimento> movimentosCarregados = new ArrayList<ProcessoMovimento>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,9 +42,22 @@ public class ProcessoActivity extends ActionBarActivity{
 		Long idProcesso = this.getIntent().getExtras().getLong(NAME_PARAMETER_ID_PROCESSO);
 		Processo processo = getProcesso(idProcesso);
 		
-		Toolbar toolBar = (Toolbar) findViewById(R.id.processo_toolbar);
-		setSupportActionBar(toolBar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		toolBar = (Toolbar) findViewById(R.id.processo_toolbar);
+		toolBar.setTitle(R.string.processo);
+		Drawable backArrowDrawble = alterarCorBotaoVoltar();
+		if (toolBar != null) {
+
+			toolBar.setNavigationIcon(backArrowDrawble);
+			
+			toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getApplicationContext(), ProcessoListActivity.class));
+				}
+			});
+		}
+		
+		addMenuToolbar(toolBar);
 		
 		TextView numeroProcesso = (TextView) findViewById(R.id.numeroProcesso);
 		TextView estadoProcesso = (TextView) findViewById(R.id.estadoProcesso);
@@ -55,7 +76,49 @@ public class ProcessoActivity extends ActionBarActivity{
 			}
 			
 		});
+	
+		addScrollListener();
 		
+	}
+
+
+
+	private void addScrollListener() {
+		ListView movimentacoes = (ListView) findViewById(R.id.movimentacoes);
+		movimentacoes.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				System.out.println("onScrollStateChanged");
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//				movimentosCarregados.addAll(ProcessoMovimento.getMockMovimentacao(true));
+//				loadListMovimentacao(movimentosCarregados);
+			}
+		});
+	}
+	
+	
+	
+	private Drawable alterarCorBotaoVoltar() {
+		Drawable backArrowDrawble = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		backArrowDrawble.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+		return backArrowDrawble;
+	}
+	
+	private void addMenuToolbar(Toolbar toolbar) {
+		toolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem itemMenu) {
+				startActivity(new MenuIntent().resolve(getApplicationContext(), itemMenu));
+				return true;
+			}
+		});
+
+		toolbar.inflateMenu(R.menu.navigation_menu);
 	}
 	
 	//TODO Colocar em uma interface, ou base activity
@@ -93,8 +156,10 @@ public class ProcessoActivity extends ActionBarActivity{
 	private void loadListMovimentacao(List<ProcessoMovimento> mockMovimentacao) {
 		String[] de = { "descricaoMovimento" };
 		int[] para = { R.id.descricaoMovimento};
-
-		SimpleAdapter adapter = new SimpleAdapter(this, convertToMapMovimentos(mockMovimentacao), R.layout.movimentos, de, para);
+		
+		movimentosCarregados.addAll(mockMovimentacao);
+		
+		SimpleAdapter adapter = new SimpleAdapter(this, convertToMapMovimentos(movimentosCarregados), R.layout.movimentos, de, para);
 		ListView listView = (ListView) findViewById(R.id.movimentacoes);
 		listView.setAdapter(adapter);
 	}
