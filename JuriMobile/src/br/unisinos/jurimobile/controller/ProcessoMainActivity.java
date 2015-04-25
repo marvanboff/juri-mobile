@@ -1,5 +1,6 @@
 package br.unisinos.jurimobile.controller;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.view.View;
 import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.view.SlidingTabLayout;
 import br.unisinos.jurimobile.view.SlidingTabLayout.TabColorizer;
-import br.unisinos.jurimobile.view.adapter.TabPesquisaProcessoAdapter;
+import br.unisinos.jurimobile.view.adapter.TabProcessoAdapter;
 
-public class PesquisaProcessoActivity extends FragmentActivity {
+public class ProcessoMainActivity extends FragmentActivity {
 
+	public final static String NAME_PARAMETER_ID_PROCESSO = "processo_id";
+	
 	private ViewPager mViewPager;
 	private SlidingTabLayout mSlidingTabLayout;
 
@@ -23,14 +26,14 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Get the view from activity_main.xml
-		setContentView(R.layout.pesquisa_processo_activity);
+		setContentView(R.layout.processo_main_activity);
 		
+		Long idProcesso = this.getIntent().getExtras().getLong(NAME_PARAMETER_ID_PROCESSO);
 		
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(new TabPesquisaProcessoAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new TabProcessoAdapter(getSupportFragmentManager(), idProcesso));
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         
-//        mSlidingTabLayout.setCustomTabView(R.layout.pesquisa_processo_tabs, Arrays.asList(R.id.tabNome, R.id.tabNumeroProcesso));
         mSlidingTabLayout.setCustomTabView(R.layout.processo_tabs, R.id.tabModel); 
         mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.primary));
         mSlidingTabLayout.setCustomTabColorizer(new PesquisarProcessoTabColorizer());
@@ -38,23 +41,13 @@ public class PesquisaProcessoActivity extends FragmentActivity {
         
         mSlidingTabLayout.setViewPager(mViewPager);
         
-//        mSlidingTabLayout.setDividerColors(getResources().getColor(R.color.primaryDark));
-//        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.primaryDark));
-        
-        
-		// Locate the viewpager in activity_main.xml
-//		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//		PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.tab_filtro_pesquisa);
-//		pagerTabStrip.setDrawFullUnderline(false);
-//		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.primary));
-
 		Toolbar toolbar = (Toolbar) findViewById(R.id.processo_toolbar);
 
 		addToolbar(toolbar);
 		
 		Drawable backArrowDrawble = alterarCorBotaoVoltar();
 		
-		toolbar.setTitle(R.string.pesquisar_processo_por);
+		toolbar.setTitle(R.string.processo);
 		if (toolbar != null) {
 
 			toolbar.setNavigationIcon(backArrowDrawble);
@@ -62,13 +55,10 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					onBackPressed();
+					startActivity(new Intent(getApplicationContext(), ProcessoListActivity.class));
 				}
 			});
 		}
-
-		// Set the ViewPagerAdapter into ViewPager
-//		viewPager.setAdapter(new TabPesquisaProcessoAdapter(getSupportFragmentManager()));
 	}
 
 	private Drawable alterarCorBotaoVoltar() {
@@ -88,7 +78,6 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 		});
 
 		toolbar.inflateMenu(R.menu.navigation_menu);
-		toolbar.getMenu().removeItem(R.id.pesquisa_processo_item_menu);
 	}
 
 	public class PesquisarProcessoTabColorizer implements TabColorizer {
@@ -99,5 +88,4 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 		}
 		
 	}
-	
 }

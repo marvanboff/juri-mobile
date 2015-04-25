@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_list_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/background_list_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/numeroProcesso_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/secundaryText"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/estadoProcesso_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="4dp"
+            android:textColor="@color/secundaryText" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="@color/subText" />
+
+        <ListView
+            android:id="@+id/lista_participantes_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

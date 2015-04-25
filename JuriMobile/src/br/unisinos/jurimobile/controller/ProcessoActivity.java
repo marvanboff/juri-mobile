@@ -17,8 +17,8 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -173,7 +173,7 @@ public class ProcessoActivity extends ActionBarActivity{
 		listView.setAdapter(adapter);
 	}
 
-	public Processo getProcesso(Long idProcesso){
+	public static Processo getProcesso(Long idProcesso){
 		if(idProcesso == null){
 			idProcesso = 4l;
 		}
@@ -186,7 +186,7 @@ public class ProcessoActivity extends ActionBarActivity{
 		
 	}
 	
-	private List<Map<String, Object>> convertToMapMovimentos(List<ProcessoMovimento> movimentos){
+	public static List<Map<String, Object>> convertToMapMovimentos(List<ProcessoMovimento> movimentos){
 		List<Map<String, Object>> mapMovimentos = new ArrayList<Map<String, Object>>();
 		
 		for (ProcessoMovimento movimento : movimentos) {
@@ -196,7 +196,7 @@ public class ProcessoActivity extends ActionBarActivity{
 		return mapMovimentos;
 	}
 	
-	private List<Map<String, Object>> convertToMapParticipantes(List<ProcessoParticipante> participantes){
+	public static List<Map<String, Object>> convertToMapParticipantes(List<ProcessoParticipante> participantes){
 		List<Map<String, Object>> mapParticipantes = new ArrayList<Map<String, Object>>();
 		
 		for (ProcessoParticipante participante : participantes) {
@@ -206,14 +206,14 @@ public class ProcessoActivity extends ActionBarActivity{
 		return mapParticipantes;
 	}
 	
-	private void addMap(ProcessoParticipante participante, List<Map<String, Object>> participantes) {
+	private static void addMap(ProcessoParticipante participante, List<Map<String, Object>> participantes) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("tipoParticipacao", participante.getTipoParticipacao());
 		map.put("nomeParticipante", participante.getNome());
 		participantes.add(map);
 	}
 	
-	private void addMap(ProcessoMovimento processoMovimento, List<Map<String, Object>> participantes) {
+	private static void addMap(ProcessoMovimento processoMovimento, List<Map<String, Object>> participantes) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("descricaoMovimento", processoMovimento.toString());
 		participantes.add(map);

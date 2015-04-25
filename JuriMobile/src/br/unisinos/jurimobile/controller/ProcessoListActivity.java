@@ -36,37 +36,10 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		
 		toolBar = (Toolbar) findViewById(R.id.lista_processo_toolbar);
 		toolBar.setTitle(R.string.meusProcessos);
-//		setSupportActionBar(toolBar);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
 		
 		addMenuToolbar(toolBar);
 		loadViewComponents();
 		loadInfoDrawerMenu();
-		
-		// Recyclerview
-//		recyclerView = (RecyclerView) findViewById(R.id.lista_processo_recycler_view);
-//		recyclerView.setHasFixedSize(true);
-		
-//		View linearLayout = findViewById(R.id.lista_processo_content);
-		
-//		layoutManager = new LinearLayoutManager(this);
-//		recyclerView.setLayoutManager(layoutManager);
-//
-//		processoListAdapter = new ProcessoListAdapter(getMockProcessos());
-//		((ProcessoListAdapter) processoListAdapter).setClickListener(this);
-//
-//		recyclerView.setAdapter(processoListAdapter);
-
-		/*navigationDrawerFragment = new NavigationDrawerFragment();
-		navigationDrawerFragment.setArguments(bundle);
-
-		FragmentManager manager = getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.grupos_processo_navigation_drawer, navigationDrawerFragment);
-		transaction.addToBackStack(null);
-		transaction.commit();*/
-		
 		
 	}
 	
@@ -90,7 +63,6 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.grupos_processo_navigation_drawer);
 		
 		navigationDrawerFragment.registerCallBack(this);
-//		toolBar = (Toolbar) findViewById(R.id.screen_default_toolbar);
 	}
 	
 	//TODO mudar implementação para fragments https://developer.android.com/guide/components/fragments.html
@@ -110,8 +82,8 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 
 	@Override
 	public void onClick(View view, Long itemId) {
-		Intent intent = new Intent(this, ProcessoActivity.class);
-		intent.putExtra(ProcessoActivity.NAME_PARAMETER_ID_PROCESSO, itemId);
+		Intent intent = new Intent(this, ProcessoMainActivity.class);
+		intent.putExtra(ProcessoMainActivity.NAME_PARAMETER_ID_PROCESSO, itemId);
 		startActivity(intent);
 	}
 	
