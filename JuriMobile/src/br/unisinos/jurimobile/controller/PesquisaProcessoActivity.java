@@ -1,5 +1,10 @@
 package br.unisinos.jurimobile.controller;
 
+import java.util.Collection;
+
+import org.apache.commons.lang3.StringUtils;
+
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,7 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import br.unisinos.jurimobile.R;
+import br.unisinos.jurimobile.facade.JuriMobileFacade;
+import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
+import br.unisinos.jurimobile.model.dto.ProcessoMockListDTO;
+import br.unisinos.jurimobile.model.entity.mock.ProcessoMock;
 import br.unisinos.jurimobile.view.SlidingTabLayout;
 import br.unisinos.jurimobile.view.SlidingTabLayout.TabColorizer;
 import br.unisinos.jurimobile.view.adapter.TabPesquisaProcessoAdapter;
@@ -30,7 +41,6 @@ public class PesquisaProcessoActivity extends FragmentActivity {
         mViewPager.setAdapter(new TabPesquisaProcessoAdapter(getSupportFragmentManager()));
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         
-//        mSlidingTabLayout.setCustomTabView(R.layout.pesquisa_processo_tabs, Arrays.asList(R.id.tabNome, R.id.tabNumeroProcesso));
         mSlidingTabLayout.setCustomTabView(R.layout.processo_tabs, R.id.tabModel); 
         mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.primary));
         mSlidingTabLayout.setCustomTabColorizer(new PesquisarProcessoTabColorizer());
@@ -38,16 +48,6 @@ public class PesquisaProcessoActivity extends FragmentActivity {
         
         mSlidingTabLayout.setViewPager(mViewPager);
         
-//        mSlidingTabLayout.setDividerColors(getResources().getColor(R.color.primaryDark));
-//        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.primaryDark));
-        
-        
-		// Locate the viewpager in activity_main.xml
-//		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//		PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.tab_filtro_pesquisa);
-//		pagerTabStrip.setDrawFullUnderline(false);
-//		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.primary));
-
 		Toolbar toolbar = (Toolbar) findViewById(R.id.processo_toolbar);
 
 		addToolbar(toolbar);
@@ -67,8 +67,6 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 			});
 		}
 
-		// Set the ViewPagerAdapter into ViewPager
-//		viewPager.setAdapter(new TabPesquisaProcessoAdapter(getSupportFragmentManager()));
 	}
 
 	private Drawable alterarCorBotaoVoltar() {
@@ -99,5 +97,46 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 		}
 		
 	}
+
+	public void pesquisarPorNome(View view){
+		JuriMobileFacade facade = new JuriMobileFacadeImpl(); 
+		
+		String nome = getInputName(view).getText().toString();
+		
+		if(StringUtils.isBlank(nome)){
+			Toast.makeText(this, "Favor informar um nome para a pesquisa", Toast.LENGTH_LONG).show();
+		}else{
+			exibiResultadoPesquisa(facade.pesquisarProcessos(view.getContext(), nome, null));
+		}
+	}
+	
+	public void pesquisarPorNumero(View view) {
+		JuriMobileFacade facade = new JuriMobileFacadeImpl();
+		
+		String numeroProcesso = getInputNumeroProcesso(view).getText().toString();
+		
+		if (StringUtils.isBlank(numeroProcesso)) {
+			Toast.makeText(this, "Favor informar um número de processo para a pesquisa", Toast.LENGTH_LONG).show();
+		} else {
+			exibiResultadoPesquisa(facade.pesquisarProcessos(view.getContext(), null, numeroProcesso));
+		}
+	}
+	
+	private EditText getInputNumeroProcesso(View view) {
+		return (EditText) findViewById(R.id.inputNumeroProcesso);
+	}
+	
+	private EditText getInputName(View view) {
+		return (EditText) findViewById(R.id.inputNome);
+	}
+	
+	public void exibiResultadoPesquisa(Collection<ProcessoMock> processos) {
+		Intent intent = new Intent(this, ResultadoPesquisaProcessoActivity.class);
+//		ProcessoMockListDTO processoMockListDTO = new ProcessoMockListDTO();
+//		processoMockListDTO.addAll(processos);
+		intent.putExtra(ResultadoPesquisaProcessoActivity.PARAMETRO_LIST_RESULT, processos.toArray(new ProcessoMock[processos.size()]));
+		startActivity(intent);
+	}
+	
 	
 }

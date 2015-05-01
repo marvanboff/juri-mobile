@@ -1,174 +1,174 @@
 ﻿--------------------------------------------------------
---  Arquivo criado - Quarta-feira-Abril-29-2015   
+--  arquivo criado - quarta-feira-abril-29-2015   
 --------------------------------------------------------
 --------------------------------------------------------
---  DDL for Table ADVOGADO
+--  ddl for table advogado
 --------------------------------------------------------
 
-  CREATE TABLE ADVOGADO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	NOME TEXT, 
-	NUMERO_OAB TEXT, 
-	DATA_ULT_ATUALIZACAO TEXT
+  create table advogado 
+   (	_id integer primary key autoincrement, 
+	nome text, 
+	numero_oab text, 
+	data_ult_atualizacao text
    ) ;
 
 --------------------------------------------------------
---  DDL for Table COMPLEMENTO_MOVIMENTO
+--  ddl for table complemento_movimento
 --------------------------------------------------------
 
-  CREATE TABLE COMPLEMENTO_MOVIMENTO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	COD_MOVIMENTO_CNJ INTEGER REFERENCES MOVIMENTOS_CNJ(COD_MOVIMENTO), 
-	GLOSSARIO TEXT
+  create table complemento_movimento 
+   (	_id integer primary key autoincrement, 
+	cod_movimento_cnj integer references movimentos_cnj(cod_movimento), 
+	glossario text
    ) ;
 
 --------------------------------------------------------
---  DDL for Table GRUPO
+--  ddl for table grupo
 --------------------------------------------------------
 
-  CREATE TABLE GRUPO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	NOME TEXT
+  create table grupo 
+   (	_id integer primary key autoincrement, 
+	data_ult_atualizacao text, 
+	nome text
    ) ;
 
 --------------------------------------------------------
---  DDL for Table USUARIO
+--  ddl for table usuario
 --------------------------------------------------------
 
-  CREATE TABLE USUARIO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	NOME TEXT, 
-	LOGIN TEXT
-   ) ;
-   
---------------------------------------------------------
---  DDL for Table PROCESSO
---------------------------------------------------------
-
-  CREATE TABLE PROCESSO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	ASSUNTO TEXT, 
-	COMARCA TEXT, 
-	DATA_DISTRIBUICAO TEXT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	NUMERO TEXT, 
-	ORGAO_JULGADOR TEXT, 
-	SITUACAO TEXT, 
-	ID_USUARIO INTEGER REFERENCES USUARIO(ID)
+  create table usuario 
+   (	_id integer primary key autoincrement, 
+	data_ult_atualizacao text, 
+	nome text, 
+	login text
    ) ;
    
 --------------------------------------------------------
---  DDL for Table GRUPO_PROCESSO
+--  ddl for table processo
 --------------------------------------------------------
 
-  CREATE TABLE GRUPO_PROCESSO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	ID_GRUPO INTEGER REFERENCES GRUPO(ID), 
-	ID_PROCESSO INTEGER REFERENCES PROCESSO(ID)
+  create table processo 
+   (	_id integer primary key autoincrement, 
+	assunto text, 
+	comarca text, 
+	data_distribuicao text, 
+	data_ult_atualizacao text, 
+	numero text, 
+	orgao_julgador text, 
+	situacao text, 
+	id_usuario integer references usuario(_id)
+   ) ;
+   
+--------------------------------------------------------
+--  ddl for table grupo_processo
+--------------------------------------------------------
+
+  create table grupo_processo 
+   (	_id integer primary key autoincrement, 
+	data_ult_atualizacao text, 
+	id_grupo integer references grupo(_id), 
+	id_processo integer references processo(_id)
    ) ;
 
 --------------------------------------------------------
---  DDL for Table PROCESSO_MOVIMENTO
+--  ddl for table processo_movimento
 --------------------------------------------------------
 
-  CREATE TABLE PROCESSO_MOVIMENTO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_MOVIMENTACAO TEXT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	DESCRICAO TEXT, 
-	ID_PROCESSO INTEGER REFERENCES PROCESSO(ID)
+  create table processo_movimento 
+   (	_id integer primary key autoincrement, 
+	data_movimentacao text, 
+	data_ult_atualizacao text, 
+	descricao text, 
+	id_processo integer references processo(_id)
    ) ;
 
 --------------------------------------------------------
---  DDL for Table PROCESSO_PARTICIPANTE
+--  ddl for table processo_participante
 --------------------------------------------------------
 
-  CREATE TABLE PROCESSO_PARTICIPANTE 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	NOME TEXT, 
-	TIPO_PARTICIPACAO TEXT, 
-	TIPO_PARTICIPANTE TEXT, 
-	ID_PROCESSO INTEGER REFERENCES PROCESSO(ID)
+  create table processo_participante 
+   (	_id integer primary key autoincrement, 
+	data_ult_atualizacao text, 
+	nome text, 
+	tipo_participacao text, 
+	tipo_participante text, 
+	id_processo integer references processo(_id)
    ) ;
 
 --------------------------------------------------------
---  DDL for Table PROCESSO_PARTICIPANTE_ADVOGADO
+--  ddl for table processo_participante_advogado
 --------------------------------------------------------
 
-  CREATE TABLE PROCESSO_PARTICIPANTE_ADVOGADO 
-   (	ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-	DATA_ULT_ATUALIZACAO TEXT, 
-	ID_PARTICIPANTE INTEGER REFERENCES PROCESSO_PARTICIPANTE(ID), 
-	ID_ADVOGADO INTEGER REFERENCES ADVOGADO(ID)
+  create table processo_participante_advogado 
+   (	_id integer primary key autoincrement, 
+	data_ult_atualizacao text, 
+	id_participante integer references processo_participante(_id), 
+	id_advogado integer references advogado(_id)
    ) ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007110
+--  ddl for index sys_c007110
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007110 ON ADVOGADO (ID) 
+  create unique index sys_c007110 on advogado (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index COMPLEMENTO_MOVIMENTO_PK
+--  ddl for index complemento_movimento_pk
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX COMPLEMENTO_MOVIMENTO_PK ON COMPLEMENTO_MOVIMENTO (ID) 
+  create unique index complemento_movimento_pk on complemento_movimento (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007078
+--  ddl for index sys_c007078
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007078 ON GRUPO (ID) 
+  create unique index sys_c007078 on grupo (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007080
+--  ddl for index sys_c007080
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007080 ON GRUPO_PROCESSO (ID) 
+  create unique index sys_c007080 on grupo_processo (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007085
+--  ddl for index sys_c007085
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007085 ON PROCESSO (ID) 
+  create unique index sys_c007085 on processo (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007091
+--  ddl for index sys_c007091
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007091 ON PROCESSO_MOVIMENTO (ID) 
+  create unique index sys_c007091 on processo_movimento (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007096
+--  ddl for index sys_c007096
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007096 ON PROCESSO_PARTICIPANTE (ID) 
+  create unique index sys_c007096 on processo_participante (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007102
+--  ddl for index sys_c007102
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007102 ON USUARIO (ID) 
+  create unique index sys_c007102 on usuario (_id) 
   ;
 
 --------------------------------------------------------
---  DDL for Index SYS_C007098
+--  ddl for index sys_c007098
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX SYS_C007098 ON PROCESSO_PARTICIPANTE_ADVOGADO (ID) 
+  create unique index sys_c007098 on processo_participante_advogado (_id) 
   ;
 
 --------------------------------------------------------
---  Constraints for Table ADVOGADO
+--  constraints for table advogado
 --------------------------------------------------------

@@ -28,7 +28,7 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 	private Toolbar toolBar;
 	private NavigationDrawerFragment navigationDrawerFragment;
 	private RecyclerViewMeusProcessosFragment recyclerViewFragment;
-
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -40,8 +40,8 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		addMenuToolbar(toolBar);
 		loadViewComponents();
 		loadInfoDrawerMenu();
-		
 	}
+
 	
 	private void addMenuToolbar(Toolbar toolBar) {
 		toolBar.setOnMenuItemClickListener(new OnMenuItemClickListener() {

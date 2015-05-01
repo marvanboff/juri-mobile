@@ -13,13 +13,13 @@ public class PesquisaPorNumeroProcessoFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.pesquisa_numero_processo_fragment_tab, container, false);
-		
+		View view = inflater.inflate(R.layout.pesquisa_numero_processo_fragment_tab, container, false);
+
 		int primary = getResources().getColor(R.color.primary);
-		EditText inputNumeroProcesso = (EditText) rootView.findViewById(R.id.inputNumeroProcesso);
+		EditText inputNumeroProcesso = (EditText) view.findViewById(R.id.inputNumeroProcesso);
 		inputNumeroProcesso.getBackground().setColorFilter(primary, PorterDuff.Mode.SRC_IN);
-		
-		return rootView;
+
+		return view;
 	}
 
 }

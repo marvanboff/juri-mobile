@@ -1,11 +1,18 @@
 package br.unisinos.jurimobile.model.entity.mock;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProcessoMock {
-
+public class ProcessoMock implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public static final String TABELA = "processo_mock";
+	public static final String _ID = "_id";
+	public static final String NUMERO = "numero";
+	
 	private Long id;
 
 	private String numero;
@@ -26,6 +33,11 @@ public class ProcessoMock {
 
 	public ProcessoMock(){
 		
+	}
+	
+	public ProcessoMock(Long id, String numero){
+		this.id = id;
+		this.numero = numero;
 	}
 	
 	public ProcessoMock(Long id, String numero, String assunto, String orgaoJulgador, String comarca, String situacao) {

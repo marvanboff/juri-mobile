@@ -1,11 +1,18 @@
 package br.unisinos.jurimobile.model.entity.mock;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
 
-public class ProcessoParticipanteMock {
-
+public class ProcessoParticipanteMock implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public static final String _ID = "_id";
+	public static final String NOME = "nome";
+	public static final String TIPO_PARTICIPANTE = "tipo_participante"; 
+	
 	private Long id;
 
 	private String nome;
@@ -17,6 +24,19 @@ public class ProcessoParticipanteMock {
 	private ProcessoMock processo;
 	
 	private List<ProcessoParticipanteAdvogadoMock> advogados;
+
+	public ProcessoParticipanteMock() {
+	}
+	
+	
+	public ProcessoParticipanteMock(Long id, String nome, TipoParticipante tipoParticipante) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.tipoParticipante = tipoParticipante;
+	}
+
+
 
 	public ProcessoParticipanteMock(Long id, String nome, String tipoParticipacao, TipoParticipante tipoParticipante) {
 		super();

@@ -13,13 +13,13 @@ public class PesquisaPorNomeFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.pesquisa_nome_fragment_tab, container, false);
+		View view = inflater.inflate(R.layout.pesquisa_nome_fragment_tab, container, false);
 		
 		int primary = getResources().getColor(R.color.primary);
-		EditText inputNome = (EditText) rootView.findViewById(R.id.inputNome);
+		EditText inputNome = (EditText) view.findViewById(R.id.inputNome);
 		inputNome.getBackground().setColorFilter(primary, PorterDuff.Mode.SRC_IN);
 		
-		return rootView;
+		return view;
 	}
-
+	
 }

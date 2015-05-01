@@ -61,7 +61,8 @@ public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment {
 		recyclerView.setHasFixedSize(true);
 		recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 		
-		processoListAdapter = new ResultadoPesquisaProcessoAdapter(ResultadoPesquisaProcessoActivity.getMockProcessos());
+		ResultadoPesquisaProcessoActivity resultadoPesquisaActivity = (ResultadoPesquisaProcessoActivity)getActivity();
+		processoListAdapter = new ResultadoPesquisaProcessoAdapter(resultadoPesquisaActivity.getProcessos());
 //		((ResultadoPesquisaProcessoAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
