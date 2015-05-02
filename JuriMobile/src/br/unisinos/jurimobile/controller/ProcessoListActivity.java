@@ -72,7 +72,8 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		if(grupo.getProcessos() == null){
 			grupo.setProcessos(getMockProcessos());
 		}
-		recyclerViewFragment.realoadRecycler(grupo.getProcessos());
+		//TODO Implementar parte do Grupo
+//		recyclerViewFragment.realoadRecycler(grupo.getProcessos());
 		
 	}
 

@@ -1,6 +1,5 @@
 package br.unisinos.jurimobile.mode.dao;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,37 +37,37 @@ public class ProcessoDAO extends JuriMobileDAO{
 		super(context);
 	}
 	
-	public Collection<ProcessoMock> pesquisarProcessos() {
+	public List<Processo> pesquisarProcessos() {
 		
 		Cursor cursor = getDataBase().rawQuery(SQL_PROCESSO_PARTICIPANTES_INFORMACOES_BASICAS, null);
 		
-		Map<Long, ProcessoMock> mapProcessos = new HashMap<Long, ProcessoMock>();
+		Map<Long, Processo> mapProcessos = new HashMap<Long, Processo>();
 		while (cursor.moveToNext()) {
 			parseToProcesso(cursor, mapProcessos);
 		}
 		
 		cursor.close();
-		return mapProcessos.values();
+		return (List<Processo>) mapProcessos.values();
 	}
 		
 	
-	private void parseToProcesso(Cursor cursor, Map<Long, ProcessoMock> mapProcessos) {
+	private void parseToProcesso(Cursor cursor, Map<Long, Processo> mapProcessos) {
 		Long idProcesso = cursor.getLong(0);
 		
-		ProcessoMock processoMock = null;
+		Processo processo = null;
 		if(mapProcessos.containsKey(idProcesso)){
-			processoMock = mapProcessos.get(idProcesso);
+			processo = mapProcessos.get(idProcesso);
 		}else{
-			processoMock = new ProcessoMock(idProcesso, cursor.getString(1));
-			mapProcessos.put(idProcesso, processoMock);
+			processo = new Processo(idProcesso, cursor.getString(1));
+			mapProcessos.put(idProcesso, processo);
 		}
 		
-		parseToParticipante(cursor, processoMock);
+		parseToParticipante(cursor, processo);
 	}
 
 
-	private void parseToParticipante(Cursor cursor, ProcessoMock processoMock) {
-		processoMock.addParticipante(new ProcessoParticipanteMock(cursor.getLong(2), cursor.getString(3), TipoParticipante.valueOf(cursor.getString(4))));
+	private void parseToParticipante(Cursor cursor, Processo processo) {
+		processo.addParticipante(new ProcessoParticipante(cursor.getLong(2), cursor.getString(3), TipoParticipante.valueOf(cursor.getString(4))));
 	}
 	
 	public Processo insert(Processo processo){
@@ -120,14 +119,19 @@ public class ProcessoDAO extends JuriMobileDAO{
 
 	public boolean desfavoritarProcesso(Long idProcesso) {
 		ProcessoParticipanteDAO participanteDAO = new ProcessoParticipanteDAO(getContext());
+		AdvogadoDAO advogadoDAO = new AdvogadoDAO(getContext());
 		
 		List<ProcessoParticipante> participantes = participanteDAO.recuperaParticipantesCompleto(idProcesso);
 		
-		
+		for (ProcessoParticipante participante : participantes) {
+			for (ProcessoParticipanteAdvogado participanteAdvogado : participante.getAdvogados()) {
+				advogadoDAO.delete(participanteAdvogado.getAdvogado());
+				advogadoDAO.delete(participanteAdvogado);
+			}
+			participanteDAO.delete(participante);
+		}
 		delete(idProcesso);
-		
-		
-		return false;
+		return true;
 	}
 	
 }

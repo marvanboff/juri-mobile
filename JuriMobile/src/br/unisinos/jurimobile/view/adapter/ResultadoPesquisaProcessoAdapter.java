@@ -17,7 +17,7 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 
 	private static final int EMPTY_VIEW = 10;
 	private List<ProcessoMock> processos;
-	private ClickListener clickListener;
+	private ClickSelectListener clickSelectListener;
 
 	public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -29,7 +29,7 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 		private Drawable favoritoDesmarcado;
 		private boolean selecionado;
 		
-		private ClickListener clickListener;
+		private ClickSelectListener clickSelectListener;
 
 		public RecyclerViewHolder(View view) {
 			super(view);
@@ -59,11 +59,11 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 				favorito.setImageDrawable(getDrawableFavoritoDesmarcado(view));
 			}
 			
-//			clickListener.onClick(view, getItemId());
+			clickSelectListener.onClick(view, getItemId(), selecionado);
 		}
 
-		public void setClickListener(ClickListener clickListener) {
-			this.clickListener = clickListener;
+		public void setClickSelectListener(ClickSelectListener clickSelectListener) {
+			this.clickSelectListener = clickSelectListener;
 		}
 
 		public ImageView getFavorito() {
@@ -72,9 +72,9 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 		
 	}
 
-	public interface ClickListener {
+	public interface ClickSelectListener {
 
-		void onClick(View view, Long itemId);
+		void onClick(View view, Long itemId, boolean selected);
 
 	}
 	
@@ -135,7 +135,7 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 
 		view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_resultado_processos_item, parent, false);
 		RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
-		recyclerViewHolder.setClickListener(getClickListener());
+		recyclerViewHolder.setClickSelectListener(getClickSelectListener());
 		return recyclerViewHolder;
 	}
 
@@ -147,12 +147,11 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 		this.processos = processos;
 	}
 
-	public void setClickListener(ClickListener clickListener) {
-		this.clickListener = clickListener;
+	public ClickSelectListener getClickSelectListener() {
+		return clickSelectListener;
 	}
 
-	public ClickListener getClickListener() {
-		return clickListener;
+	public void setClickSelectListener(ClickSelectListener clickSelectListener) {
+		this.clickSelectListener = clickSelectListener;
 	}
-
 }

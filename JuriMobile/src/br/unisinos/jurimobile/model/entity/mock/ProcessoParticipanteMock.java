@@ -29,7 +29,6 @@ public class ProcessoParticipanteMock implements Serializable {
 	public ProcessoParticipanteMock() {
 	}
 	
-	
 	public ProcessoParticipanteMock(Long id, String nome, TipoParticipante tipoParticipante) {
 		super();
 		this.id = id;

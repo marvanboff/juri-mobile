@@ -1,41 +1,67 @@
 package br.unisinos.jurimobile.model.entity2;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Processo implements Auditavel{
+public class Processo implements Auditavel {
 
 	private Long id;
 
 	private String numero;
-	
+
 	private String assunto;
-	
+
 	private String situacao;
-	
+
 	private String comarca;
-	
+
 	private String orgaoJulgador;
-	
+
 	private Date dataDistribuicao;
-	
+
 	private Usuario usuario;
-	
+
 	private List<ProcessoParticipante> participantes;
-	
+
 	private List<GrupoProcesso> grupos;
-	
+
 	private List<ProcessoMovimento> movimentacoes;
-	
+
 	private Date dataUltAtualizacao;
-	
+
 	public Processo(Long idProcesso) {
 		this.setId(idProcesso);
 	}
 
 	public Processo() {
 	}
-	
+
+	public Processo(Long idProcesso, String numeroProcesso) {
+		this.id = idProcesso;
+		this.numero = numeroProcesso;
+	}
+
+	public String getNomesParticipantes() {
+		StringBuilder nomes = new StringBuilder();
+		if (participantes != null) {
+			for (ProcessoParticipante participante : participantes) {
+				if (nomes.length() > 0) {
+					nomes.append(", ");
+				}
+				nomes.append(participante.getNome());
+			}
+		}
+		return nomes.toString();
+	}
+
+	public boolean addParticipante(ProcessoParticipante participante) {
+		if (participantes == null) {
+			participantes = new ArrayList<ProcessoParticipante>();
+		}
+		return participantes.add(participante);
+	}
+
 	public Long getId() {
 		return id;
 	}

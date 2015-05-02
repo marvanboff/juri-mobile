@@ -16,8 +16,9 @@ import br.unisinos.jurimobile.controller.ResultadoPesquisaProcessoActivity;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoMock;
 import br.unisinos.jurimobile.view.adapter.DividerItemDecoration;
 import br.unisinos.jurimobile.view.adapter.ResultadoPesquisaProcessoAdapter;
+import br.unisinos.jurimobile.view.adapter.ResultadoPesquisaProcessoAdapter.ClickSelectListener;
 
-public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment {
+public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment implements ClickSelectListener {
 
 	protected Context context;
 	protected Activity activity;
@@ -63,7 +64,7 @@ public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment {
 		
 		ResultadoPesquisaProcessoActivity resultadoPesquisaActivity = (ResultadoPesquisaProcessoActivity)getActivity();
 		processoListAdapter = new ResultadoPesquisaProcessoAdapter(resultadoPesquisaActivity.getProcessos());
-//		((ResultadoPesquisaProcessoAdapter) processoListAdapter).setClickListener((ClickListener) activity);
+		((ResultadoPesquisaProcessoAdapter) processoListAdapter).setClickSelectListener((ClickSelectListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
 		
@@ -74,6 +75,12 @@ public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment {
 //		((ProcessoListAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
+		
+	}
+
+	@Override
+	public void onClick(View view, Long itemId, boolean selected) {
+		
 		
 	}
 	

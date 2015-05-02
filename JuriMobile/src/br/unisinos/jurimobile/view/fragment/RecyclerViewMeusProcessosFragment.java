@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.controller.ProcessoListActivity;
-import br.unisinos.jurimobile.model.entity.Processo;
+import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
+import br.unisinos.jurimobile.mode.dao.ProcessoDAO;
+import br.unisinos.jurimobile.model.entity2.Processo;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter;
 import br.unisinos.jurimobile.view.adapter.ProcessoListAdapter.ClickListener;
 
@@ -60,7 +62,7 @@ public class RecyclerViewMeusProcessosFragment extends Fragment {
 		recyclerView.setLayoutManager(layoutManager);
 		recyclerView.setHasFixedSize(true);
 		
-		processoListAdapter = new ProcessoListAdapter(ProcessoListActivity.getMockProcessos());
+		processoListAdapter = new ProcessoListAdapter(new JuriMobileFacadeImpl().listarProcessosUsuario(getActivity()));
 		((ProcessoListAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
