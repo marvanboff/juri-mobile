@@ -1,9 +1,11 @@
 package br.unisinos.jurimobile.model.entity2;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
+import br.unisinos.jurimobile.model.entity.mock.ProcessoParticipanteAdvogadoMock;
 
 public class ProcessoParticipante implements Auditavel {
 
@@ -20,7 +22,14 @@ public class ProcessoParticipante implements Auditavel {
 	private List<ProcessoParticipanteAdvogado> advogados;
 
 	private Date dataUltAtualizacao;
-
+	
+	public boolean addAdvogado(ProcessoParticipanteAdvogado advogado){
+		if(advogados == null){
+			advogados = new ArrayList<ProcessoParticipanteAdvogado>();
+		}
+		return advogados.add(advogado);
+	}
+	
 	public List<ProcessoParticipanteAdvogado> getAdvogados() {
 		return advogados;
 	}

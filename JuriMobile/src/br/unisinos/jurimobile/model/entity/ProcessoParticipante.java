@@ -3,6 +3,7 @@ package br.unisinos.jurimobile.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class ProcessoParticipante {
 
 	private Long id;

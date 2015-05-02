@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 public class JuriMobileDAO {
 
 	private DataBaseHelper helper;
+	private Context context;
+	
+	protected String QUERY_SEL = "select * from %s";
 
 	public JuriMobileDAO(Context context) {
 		helper = new DataBaseHelper(context);
@@ -34,5 +37,10 @@ public class JuriMobileDAO {
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
 		}
+	}
+
+
+	public Context getContext() {
+		return context;
 	}
 }

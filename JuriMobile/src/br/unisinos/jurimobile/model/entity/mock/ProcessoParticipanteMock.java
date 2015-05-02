@@ -1,6 +1,7 @@
 package br.unisinos.jurimobile.model.entity.mock;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
@@ -21,7 +22,7 @@ public class ProcessoParticipanteMock implements Serializable {
 
 	private TipoParticipante tipoParticipante;
 
-	private ProcessoMock processo;
+	private Long idProcesso;
 	
 	private List<ProcessoParticipanteAdvogadoMock> advogados;
 
@@ -45,7 +46,14 @@ public class ProcessoParticipanteMock implements Serializable {
 		this.tipoParticipacao = tipoParticipacao;
 		this.tipoParticipante = tipoParticipante;
 	}
-
+	
+	public boolean addAdvogado(ProcessoParticipanteAdvogadoMock advogadoMock){
+		if(advogados == null){
+			advogados = new ArrayList<ProcessoParticipanteAdvogadoMock>();
+		}
+		return advogados.add(advogadoMock);
+	}
+	
 	public List<ProcessoParticipanteAdvogadoMock> getAdvogados() {
 		return advogados;
 	}
@@ -86,12 +94,14 @@ public class ProcessoParticipanteMock implements Serializable {
 		this.tipoParticipante = tipoParticipante;
 	}
 
-	public ProcessoMock getProcesso() {
-		return processo;
+
+	public Long getIdProcesso() {
+		return idProcesso;
 	}
 
-	public void setProcesso(ProcessoMock processo) {
-		this.processo = processo;
-	}
 
+	public void setIdProcesso(Long idProcesso) {
+		this.idProcesso = idProcesso;
+	}
+	
 }

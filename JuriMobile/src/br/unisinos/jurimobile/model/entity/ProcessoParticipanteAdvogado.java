@@ -1,5 +1,6 @@
 package br.unisinos.jurimobile.model.entity;
 
+@Deprecated
 public class ProcessoParticipanteAdvogado {
 
 	private Long id;

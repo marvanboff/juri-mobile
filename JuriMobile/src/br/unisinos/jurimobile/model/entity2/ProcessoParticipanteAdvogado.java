@@ -11,6 +11,16 @@ public class ProcessoParticipanteAdvogado implements Auditavel {
 	private Advogado advogado;
 
 	private Date dataUltAtualizacao;
+	
+	public ProcessoParticipanteAdvogado() {
+		super();
+	}
+	
+	public ProcessoParticipanteAdvogado(ProcessoParticipante participante, Advogado advogado) {
+		super();
+		this.participante = participante;
+		this.advogado = advogado;
+	}
 
 	public Long getId() {
 		return id;

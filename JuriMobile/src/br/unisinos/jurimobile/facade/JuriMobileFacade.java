@@ -8,4 +8,8 @@ import android.content.Context;
 public interface JuriMobileFacade {
 
 	Collection<ProcessoMock> pesquisarProcessos(Context context, String nome, String numeroProcesso);
+	
+	boolean favoritarProcesso(Context context, Long idProcessoMock);
+	
+	boolean desfavoritarProcesso(Context context, Long idProcesso);
 }

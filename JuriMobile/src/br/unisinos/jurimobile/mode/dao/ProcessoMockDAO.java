@@ -13,11 +13,14 @@ import android.database.Cursor;
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoMock;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoParticipanteMock;
+import br.unisinos.jurimobile.utils.DateUtils;
 
 public class ProcessoMockDAO extends JuriMobileDAO {
 	
-	private String SQL_PROCESSO_PARTICIPANTES_INFORMACOES_BASICAS = "select processo._id, processo.numero, participante._id, participante.nome, participante.tipo_participante from processo_mock as processo " +
+	private static final String SQL_PROCESSO_PARTICIPANTES_INFORMACOES_BASICAS = "select processo._id, processo.numero, participante._id, participante.nome, participante.tipo_participante from processo_mock as processo " +
 			"inner join processo_participante_mock as participante on (processo._id = participante.id_processo)";
+	
+	private static final String QUERY_SEL_PROCESSO = "select _id, assunto, comarca, data_distribuicao, numero, orgao_julgador, situacao from processo_mock where _id = ? ";
 	
 	public ProcessoMockDAO(Context context) {
 		super(context);
@@ -37,7 +40,7 @@ public class ProcessoMockDAO extends JuriMobileDAO {
 		
 		Map<Long, ProcessoMock> mapProcessos = new HashMap<Long, ProcessoMock>();
 		while (cursor.moveToNext()) {
-			extrairProcesso(cursor, mapProcessos);
+			parseInformacoesBasicas(cursor, mapProcessos);
 		}
 		
 		cursor.close();
@@ -83,7 +86,7 @@ public class ProcessoMockDAO extends JuriMobileDAO {
 	}
 
 
-	private void extrairProcesso(Cursor cursor, Map<Long, ProcessoMock> mapProcessos) {
+	private void parseInformacoesBasicas(Cursor cursor, Map<Long, ProcessoMock> mapProcessos) {
 		Long idProcesso = cursor.getLong(0);
 		
 		ProcessoMock processoMock = null;
@@ -94,13 +97,33 @@ public class ProcessoMockDAO extends JuriMobileDAO {
 			mapProcessos.put(idProcesso, processoMock);
 		}
 		
-		extrairParticipante(cursor, processoMock);
-	}
-
-
-	private void extrairParticipante(Cursor cursor, ProcessoMock processoMock) {
 		processoMock.addParticipante(new ProcessoParticipanteMock(cursor.getLong(2), cursor.getString(3), TipoParticipante.valueOf(cursor.getString(4))));
 	}
 	
+	
+	public ProcessoMock parseToProcesso(Cursor cursor){
+		ProcessoMock processo = new ProcessoMock();
+		
+		processo.setId(cursor.getLong(0));
+		processo.setAssunto(cursor.getString(1));
+		processo.setComarca(cursor.getString(2));
+		processo.setDataDistribuicao(DateUtils.parseDate(cursor.getString(3)));
+		processo.setNumero(cursor.getString(4));
+		processo.setOrgaoJulgador(cursor.getString(5));
+		processo.setSituacao(cursor.getString(6));
+		
+		return processo;
+	}
+	
+	public ProcessoMock pesquisarProcesso(Long idProcessoMock){
+		Cursor cursor = getDataBase().rawQuery(QUERY_SEL_PROCESSO, new String[]{ idProcessoMock.toString() });
+		
+		ProcessoMock processo = null;
+		while (cursor.moveToNext()) {
+			processo = parseToProcesso(cursor);
+		}
+		cursor.close();
+		return processo;
+	}
 	
 }

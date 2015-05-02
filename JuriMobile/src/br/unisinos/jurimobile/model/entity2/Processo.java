@@ -29,6 +29,13 @@ public class Processo implements Auditavel{
 	
 	private Date dataUltAtualizacao;
 	
+	public Processo(Long idProcesso) {
+		this.setId(idProcesso);
+	}
+
+	public Processo() {
+	}
+	
 	public Long getId() {
 		return id;
 	}

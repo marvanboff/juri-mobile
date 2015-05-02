@@ -5,7 +5,7 @@ public class ProcessoParticipanteAdvogadoMock {
 
 	private Long id;
 
-	private ProcessoParticipanteMock participante;
+	private Long idParticipante;
 
 	private AdvogadoMock advogado;
 
@@ -17,12 +17,12 @@ public class ProcessoParticipanteAdvogadoMock {
 		this.id = id;
 	}
 
-	public ProcessoParticipanteMock getParticipante() {
-		return participante;
+	public Long getIdParticipante() {
+		return idParticipante;
 	}
 
-	public void setParticipante(ProcessoParticipanteMock participante) {
-		this.participante = participante;
+	public void setIdParticipante(Long idParticipante) {
+		this.idParticipante = idParticipante;
 	}
 
 	public AdvogadoMock getAdvogado() {
