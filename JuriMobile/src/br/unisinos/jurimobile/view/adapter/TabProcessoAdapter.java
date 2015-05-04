@@ -3,6 +3,7 @@ package br.unisinos.jurimobile.view.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import br.unisinos.jurimobile.model.entity2.Processo;
 import br.unisinos.jurimobile.view.fragment.DetalhesProcessoTabFragment;
 import br.unisinos.jurimobile.view.fragment.MovimentacoesProcessoTabFragment;
  
@@ -12,11 +13,11 @@ public class TabProcessoAdapter extends FragmentPagerAdapter {
 	// Tab Titles
 	private String tabtitles[] = new String[] { "Geral", "Movimentações" };
  
-	private Long idProcesso;
+	private Processo processo;
 	
-	public TabProcessoAdapter(FragmentManager fm, Long idProcesso) {
+	public TabProcessoAdapter(FragmentManager fm, Processo processo) {
 		super(fm);
-		this.idProcesso = idProcesso;
+		this.processo = processo;
 	}
  
 	@Override
@@ -29,9 +30,9 @@ public class TabProcessoAdapter extends FragmentPagerAdapter {
 		switch (position) {
  
 		case 0:
-			return new DetalhesProcessoTabFragment(idProcesso);
+			return new DetalhesProcessoTabFragment(processo);
 		case 1:
-			return new MovimentacoesProcessoTabFragment(idProcesso);
+			return new MovimentacoesProcessoTabFragment(processo);
 		}
 		return null;
 	}

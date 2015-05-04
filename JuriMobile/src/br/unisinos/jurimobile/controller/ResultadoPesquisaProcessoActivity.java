@@ -13,9 +13,12 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import br.unisinos.jurimobile.R;
+import br.unisinos.jurimobile.facade.JuriMobileFacade;
+import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoMock;
+import br.unisinos.jurimobile.view.adapter.ResultadoPesquisaProcessoAdapter.ClickSelectListener;
 
-public class ResultadoPesquisaProcessoActivity extends ActionBarActivity {
+public class ResultadoPesquisaProcessoActivity extends ActionBarActivity implements ClickSelectListener {
 
 	private Toolbar toolBar;
 
@@ -84,6 +87,16 @@ public class ResultadoPesquisaProcessoActivity extends ActionBarActivity {
 
 	public void setProcessos(List<ProcessoMock> processos) {
 		this.processos = processos;
+	}
+
+	@Override
+	public void onClick(View view, Long itemId, boolean selected) {
+		JuriMobileFacade facade = new JuriMobileFacadeImpl();
+		if(selected){
+			facade.favoritarProcesso(this, itemId);
+		}else{
+			facade.desfavoritarProcesso(this, itemId);
+		}
 	}
 
 }

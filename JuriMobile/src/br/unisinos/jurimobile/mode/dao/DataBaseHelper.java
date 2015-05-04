@@ -127,6 +127,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     	return dataBase;
     }
     
+    public SQLiteDatabase openDataBaseWrite() throws SQLException{
+    	 
+    	//Open the database
+        String myPath = DB_PATH + DB_NAME;
+    	dataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+ 
+    	return dataBase;
+    }
  
     public SQLiteDatabase getDataBase() {
 		return dataBase;

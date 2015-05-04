@@ -20,8 +20,8 @@ public class ProcessoParticipanteMockDAO extends JuriMobileDAO {
 																	"participante.id_processo, participante_advogado._id, participante_advogado.id_participante, " +
 																	"participante_advogado.id_advogado, advogado._id, advogado.nome, advogado.numero_oab " + 
 																	"from participante_advogado_mock participante_advogado " + 
-																	"inner join advogado_mock advogado on (participante_advogado._id = advogado._id) " +
-																	"inner join processo_participante_mock participante on (participante._id = participante_advogado._id) " +
+																	"inner join advogado_mock advogado on (participante_advogado.id_advogado = advogado._id) " +
+																	"inner join processo_participante_mock participante on (participante_advogado.id_participante = participante._id) " +
 																	"where participante.id_processo =  ? ";
 	
 	public ProcessoParticipanteMockDAO(Context context) {
@@ -62,7 +62,7 @@ public class ProcessoParticipanteMockDAO extends JuriMobileDAO {
 			participante.addAdvogado(participanteAdvogado);
 		}
 		cursor.close();
-		return (List<ProcessoParticipanteMock>) mapParticipantes.values();
+		return new ArrayList<ProcessoParticipanteMock>(mapParticipantes.values());
 		
 	}
 	

@@ -2,6 +2,7 @@ package br.unisinos.jurimobile.model.entity.mock;
 
 import br.unisinos.jurimobile.model.entity2.Advogado;
 import br.unisinos.jurimobile.model.entity2.Processo;
+import br.unisinos.jurimobile.model.entity2.ProcessoMovimento;
 import br.unisinos.jurimobile.model.entity2.ProcessoParticipante;
 
 public class TransformMockToEntity {
@@ -39,4 +40,15 @@ public class TransformMockToEntity {
 		return advogado;
 	}
 	
+	
+	public static ProcessoMovimento transformTo(ProcessoMovimentoMock mock){
+		ProcessoMovimento movimento = new ProcessoMovimento();
+		
+		movimento.setDataMovimentacao(mock.getDataMovimentacao());
+		movimento.setDescricao(mock.getDescricao());
+		movimento.setCodigoMovimentoCNJ(mock.getCodMovimentoCNJ());
+		movimento.setTextoAjuda(mock.getTextoAjuda());
+
+		return movimento;
+	}
 }

@@ -35,7 +35,7 @@ public class AdvogadoDAO extends JuriMobileDAO {
 		values.put(AdvogadoColumns.nome.name(), advogado.getNome());
 		values.put(AdvogadoColumns.numero_oab.name(), advogado.getNumeroOAB());
 
-		Long idAdvogado = getDataBase().insert(AdvogadoColumns.getTableName(), null, values);
+		Long idAdvogado = getDataBaseWrite().insert(AdvogadoColumns.getTableName(), null, values);
 		advogado.setId(idAdvogado);
 		return advogado;
 	}
@@ -46,17 +46,17 @@ public class AdvogadoDAO extends JuriMobileDAO {
 		values.put(ProcessoParticipanteAdvogadoColumns.id_participante.name(), participanteAdvogado.getParticipante().getId());
 		values.put(ProcessoParticipanteAdvogadoColumns.id_advogado.name(), participanteAdvogado.getAdvogado().getId());
 
-		Long idParticipanteAdvogado = getDataBase().insert(ProcessoParticipanteAdvogadoColumns.getTableName(), null, values);
+		Long idParticipanteAdvogado = getDataBaseWrite().insert(ProcessoParticipanteAdvogadoColumns.getTableName(), null, values);
 		participanteAdvogado.setId(idParticipanteAdvogado);
 		return participanteAdvogado;
 	}
 	
 	public void delete(Advogado advogado){
-		getDataBase().delete(AdvogadoColumns.getTableName(), AdvogadoColumns._id.name() + " = ? ", new String[] {advogado.getId().toString()});
+		getDataBaseWrite().delete(AdvogadoColumns.getTableName(), AdvogadoColumns._id.name() + " = ? ", new String[] {advogado.getId().toString()});
 	}
 	
 	public void delete(ProcessoParticipanteAdvogado participanteAdvogado){
-		getDataBase().delete(ProcessoParticipanteAdvogadoColumns.getTableName(), ProcessoParticipanteAdvogadoColumns._id.name() + " = ? ", new String[] {participanteAdvogado.getId().toString()});
+		getDataBaseWrite().delete(ProcessoParticipanteAdvogadoColumns.getTableName(), ProcessoParticipanteAdvogadoColumns._id.name() + " = ? ", new String[] {participanteAdvogado.getId().toString()});
 	}
 	
 }

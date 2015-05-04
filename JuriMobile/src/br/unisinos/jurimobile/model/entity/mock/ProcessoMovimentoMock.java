@@ -12,9 +12,11 @@ public class ProcessoMovimentoMock {
 
 	private String descricao;
 
-	private ProcessoMock processo;
+	private Long idProcesso;
 
-	private MovimentosCNJ movimentoCNJ;
+	private Long codMovimentoCNJ;
+	
+	private String textoAjuda;
 
 	@Override
 	public String toString() {
@@ -45,20 +47,29 @@ public class ProcessoMovimentoMock {
 		this.dataMovimentacao = dataMovimentacao;
 	}
 
-	public ProcessoMock getProcesso() {
-		return processo;
+	public Long getIdProcesso() {
+		return idProcesso;
 	}
 
-	public void setProcesso(ProcessoMock processo) {
-		this.processo = processo;
+	public void setIdProcesso(Long idProcesso) {
+		this.idProcesso = idProcesso;
 	}
 
-	public MovimentosCNJ getMovimentoCNJ() {
-		return movimentoCNJ;
+	public Long getCodMovimentoCNJ() {
+		return codMovimentoCNJ;
 	}
 
-	public void setMovimentoCNJ(MovimentosCNJ movimentoCNJ) {
-		this.movimentoCNJ = movimentoCNJ;
+	public void setCodMovimentoCNJ(Long codMovimentoCNJ) {
+		this.codMovimentoCNJ = codMovimentoCNJ;
 	}
+
+	public String getTextoAjuda() {
+		return textoAjuda;
+	}
+
+	public void setTextoAjuda(String textoAjuda) {
+		this.textoAjuda = textoAjuda;
+	}
+	
 
 }

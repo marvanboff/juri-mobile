@@ -9,9 +9,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
-import br.unisinos.jurimobile.model.entity.mock.AdvogadoMock;
-import br.unisinos.jurimobile.model.entity.mock.ProcessoParticipanteAdvogadoMock;
-import br.unisinos.jurimobile.model.entity.mock.ProcessoParticipanteMock;
 import br.unisinos.jurimobile.model.entity2.Advogado;
 import br.unisinos.jurimobile.model.entity2.Processo;
 import br.unisinos.jurimobile.model.entity2.ProcessoParticipante;
@@ -23,7 +20,7 @@ public class ProcessoParticipanteDAO extends JuriMobileDAO {
 																	"participante.id_processo, participante.data_ult_atualizacao, participante_advogado._id, participante_advogado.id_participante, " +
 																	"participante_advogado.id_advogado, participante_advogado.data_ult_atualizacao, advogado._id, advogado.nome, " +
 																	"advogado.numero_oab, advogado.data_ult_atualizacao " + 
-																	"from participante_advogado participante_advogado " + 
+																	"from processo_participante_advogado participante_advogado " + 
 																	"inner join advogado advogado on (participante_advogado._id = advogado._id) " +
 																	"inner join processo_participante participante on (participante._id = participante_advogado._id) " +
 																	"where participante.id_processo =  ? ";
@@ -62,7 +59,7 @@ public class ProcessoParticipanteDAO extends JuriMobileDAO {
 			participante.addAdvogado(participanteAdvogado);
 		}
 		cursor.close();
-		return (List<ProcessoParticipante>) mapParticipantes.values();
+		return new ArrayList<ProcessoParticipante>(mapParticipantes.values());
 		
 	}
 	
@@ -102,13 +99,13 @@ public class ProcessoParticipanteDAO extends JuriMobileDAO {
 		values.put(ProcessoParticipanteColumns.tipo_participante.name(), participante.getTipoParticipante().name());
 		values.put(ProcessoParticipanteColumns.id_processo.name(), participante.getProcesso().getId());
 		
-		Long idProcesso = getDataBase().insert(ProcessoParticipanteColumns.getTableName(), null, values);
+		Long idProcesso = getDataBaseWrite().insert(ProcessoParticipanteColumns.getTableName(), null, values);
 		participante.setId(idProcesso);
 		return participante;
 	}
 	
 	public void delete(ProcessoParticipante participante){
-		getDataBase().delete(ProcessoParticipanteColumns.getTableName(), ProcessoParticipanteColumns._id.name() + " = ? ", new String[] {participante.getId().toString()});
+		getDataBaseWrite().delete(ProcessoParticipanteColumns.getTableName(), ProcessoParticipanteColumns._id.name() + " = ? ", new String[] {participante.getId().toString()});
 	}
 	
 }

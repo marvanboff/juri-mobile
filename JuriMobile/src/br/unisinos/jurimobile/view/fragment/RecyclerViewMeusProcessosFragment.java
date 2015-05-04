@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import br.unisinos.jurimobile.R;
 import br.unisinos.jurimobile.controller.ProcessoListActivity;
 import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
@@ -52,29 +56,33 @@ public class RecyclerViewMeusProcessosFragment extends Fragment {
 		recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_recycler_processos, container, false);
 
 		loadView();
+		registerForContextMenu(recyclerView);
 
 		return recyclerView;
 	}
-
+	
 	private void loadView() {
 		
 		layoutManager = new LinearLayoutManager(context);
 		recyclerView.setLayoutManager(layoutManager);
 		recyclerView.setHasFixedSize(true);
 		
-		processoListAdapter = new ProcessoListAdapter(new JuriMobileFacadeImpl().listarProcessosUsuario(getActivity()));
+		processoListAdapter = new ProcessoListAdapter(listarProcessosPorUsuario());
 		((ProcessoListAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
 		
 	}
 
-	public void realoadRecycler(List<Processo> processos){
-		processoListAdapter = new ProcessoListAdapter(processos);
+	private List<Processo> listarProcessosPorUsuario() {
+		return new JuriMobileFacadeImpl().listarProcessosUsuario(getActivity());
+	}
+
+	public void realoadRecycler(){
+		processoListAdapter = new ProcessoListAdapter(listarProcessosPorUsuario());
 		((ProcessoListAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
 		recyclerView.setAdapter(processoListAdapter);
-		
 	}
 	
 }

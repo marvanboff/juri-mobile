@@ -79,6 +79,8 @@
 	data_movimentacao text, 
 	data_ult_atualizacao text, 
 	descricao text, 
+	texto_ajuda text,
+	cod_movimento_cnj integer,
 	id_processo integer references processo(_id)
    ) ;
 

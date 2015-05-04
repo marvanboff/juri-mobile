@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import br.unisinos.jurimobile.R;
+import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
+import br.unisinos.jurimobile.model.entity2.Processo;
 import br.unisinos.jurimobile.view.SlidingTabLayout;
 import br.unisinos.jurimobile.view.SlidingTabLayout.TabColorizer;
 import br.unisinos.jurimobile.view.adapter.TabProcessoAdapter;
@@ -21,7 +23,7 @@ public class ProcessoMainActivity extends FragmentActivity {
 	
 	private ViewPager mViewPager;
 	private SlidingTabLayout mSlidingTabLayout;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class ProcessoMainActivity extends FragmentActivity {
 		Long idProcesso = this.getIntent().getExtras().getLong(NAME_PARAMETER_ID_PROCESSO);
 		
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(new TabProcessoAdapter(getSupportFragmentManager(), idProcesso));
+        mViewPager.setAdapter(new TabProcessoAdapter(getSupportFragmentManager(), recuperarProcesso(idProcesso)));
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         
         mSlidingTabLayout.setCustomTabView(R.layout.processo_tabs, R.id.tabModel); 
@@ -61,6 +63,10 @@ public class ProcessoMainActivity extends FragmentActivity {
 		}
 	}
 
+	private Processo recuperarProcesso(Long idProcesso) {
+		return new JuriMobileFacadeImpl().recuperarProcesso(this, idProcesso);
+	}
+
 	private Drawable alterarCorBotaoVoltar() {
 		Drawable backArrowDrawble = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		backArrowDrawble.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -88,4 +94,5 @@ public class ProcessoMainActivity extends FragmentActivity {
 		}
 		
 	}
+	
 }

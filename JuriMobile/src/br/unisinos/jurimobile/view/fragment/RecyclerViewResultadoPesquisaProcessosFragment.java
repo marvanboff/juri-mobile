@@ -18,13 +18,13 @@ import br.unisinos.jurimobile.view.adapter.DividerItemDecoration;
 import br.unisinos.jurimobile.view.adapter.ResultadoPesquisaProcessoAdapter;
 import br.unisinos.jurimobile.view.adapter.ResultadoPesquisaProcessoAdapter.ClickSelectListener;
 
-public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment implements ClickSelectListener {
+public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment  {
 
 	protected Context context;
 	protected Activity activity;
 	
 	private RecyclerView recyclerView;
-	private RecyclerView.Adapter<RecyclerView.ViewHolder> processoListAdapter;
+	private RecyclerView.Adapter<RecyclerView.ViewHolder> resultadoPesquisaAdapter;
 	private RecyclerView.LayoutManager layoutManager;
 	
 
@@ -63,25 +63,20 @@ public class RecyclerViewResultadoPesquisaProcessosFragment extends Fragment imp
 		recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 		
 		ResultadoPesquisaProcessoActivity resultadoPesquisaActivity = (ResultadoPesquisaProcessoActivity)getActivity();
-		processoListAdapter = new ResultadoPesquisaProcessoAdapter(resultadoPesquisaActivity.getProcessos());
-		((ResultadoPesquisaProcessoAdapter) processoListAdapter).setClickSelectListener((ClickSelectListener) activity);
+		resultadoPesquisaAdapter = new ResultadoPesquisaProcessoAdapter(resultadoPesquisaActivity.getProcessos());
+		((ResultadoPesquisaProcessoAdapter) resultadoPesquisaAdapter).setClickSelectListener((ClickSelectListener) activity);
 		
-		recyclerView.setAdapter(processoListAdapter);
+		recyclerView.setAdapter(resultadoPesquisaAdapter);
 		
 	}
 
 	public void realoadRecycler(List<ProcessoMock> processos){
-		processoListAdapter = new ResultadoPesquisaProcessoAdapter(processos);
+		resultadoPesquisaAdapter = new ResultadoPesquisaProcessoAdapter(processos);
 //		((ProcessoListAdapter) processoListAdapter).setClickListener((ClickListener) activity);
 		
-		recyclerView.setAdapter(processoListAdapter);
+		recyclerView.setAdapter(resultadoPesquisaAdapter);
 		
 	}
 
-	@Override
-	public void onClick(View view, Long itemId, boolean selected) {
-		
-		
-	}
 	
 }

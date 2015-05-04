@@ -61,6 +61,13 @@ public class Processo implements Auditavel {
 		}
 		return participantes.add(participante);
 	}
+	
+	public boolean addMovimento(ProcessoMovimento movimento) {
+		if(movimentacoes == null){
+			movimentacoes = new ArrayList<ProcessoMovimento>();
+		}
+		return movimentacoes.add(movimento);
+	}
 
 	public Long getId() {
 		return id;

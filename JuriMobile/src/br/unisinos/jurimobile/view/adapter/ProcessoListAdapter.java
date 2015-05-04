@@ -3,12 +3,16 @@ package br.unisinos.jurimobile.view.adapter;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import br.unisinos.jurimobile.R;
-import br.unisinos.jurimobile.model.entity.Processo;
+import br.unisinos.jurimobile.controller.ProcessoListActivity.ProcessoContextMenu;
+import br.unisinos.jurimobile.model.entity2.Processo;
 
 public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -16,7 +20,7 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	private List<Processo> processos;
 	private ClickListener clickListener;
 	
-	public static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+	public static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
 
 		private TextView numeroProcesso;
 		private TextView participantes;
@@ -29,6 +33,8 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 			participantes = (TextView) view.findViewById(R.id.participantes);
 			
 			view.setOnClickListener(this);
+			view.setOnCreateContextMenuListener(this);
+
 		}
 
 		public TextView getNumeroProcesso() {
@@ -46,6 +52,16 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 		public void setClickListener(ClickListener clickListener) {
 			this.clickListener = clickListener;
+		}
+
+		@Override
+		public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+//			v.inflate(v.getContext(), R.menu.processo_context_menu, null);
+			
+			menu.add(ProcessoContextMenu.EXIBIR.getGroupID(), 1, Menu.NONE, R.string.exibir);
+			menu.add(ProcessoContextMenu.REMOVER.getGroupID(), Integer.valueOf(String.valueOf(getItemId())), Menu.NONE, R.string.remover);
+			
+			
 		}
 		
 	}
@@ -70,10 +86,12 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-		Processo processo = processos.get(position);
-		RecyclerViewHolder recycleHolder = (RecyclerViewHolder) holder;
-		recycleHolder.getNumeroProcesso().setText(processo.getNumero());
-		recycleHolder.getParticipantes().setText(processo.getNomesParticipantes());
+		if(!processos.isEmpty()){
+			Processo processo = processos.get(position);
+			RecyclerViewHolder recycleHolder = (RecyclerViewHolder) holder;
+			recycleHolder.getNumeroProcesso().setText(processo.getNumero());
+			recycleHolder.getParticipantes().setText(processo.getNomesParticipantes());
+		}
 	}
 	
 	@Override
@@ -86,6 +104,9 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	
 	@Override
 	public long getItemId(int position) {
+		if(processos.isEmpty()){
+			return 0;
+		}
 		return processos.get(position).getId();
 	}
 	
@@ -103,7 +124,7 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 		recyclerViewHolder.setClickListener(getClickListener());
 		return recyclerViewHolder;
 	}
-
+	
 	public List<Processo> getProcessos() {
 		return processos;
 	}

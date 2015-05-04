@@ -12,6 +12,7 @@ import android.content.Context;
 import android.database.Cursor;
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoMock;
+import br.unisinos.jurimobile.model.entity.mock.ProcessoMovimentoMock;
 import br.unisinos.jurimobile.model.entity.mock.ProcessoParticipanteMock;
 import br.unisinos.jurimobile.utils.DateUtils;
 
@@ -31,12 +32,10 @@ public class ProcessoMockDAO extends JuriMobileDAO {
 		StringBuilder sql = new StringBuilder(SQL_PROCESSO_PARTICIPANTES_INFORMACOES_BASICAS);
 		List<Parametro> parametros = montaClausulaWhere(nome, numeroProcesso);
 		
-		//TODO COMENTADO PARA TESTE
-//		addWhereExpression(sql, parametros);
-//		List<String> arguments = extractArguments(parametros);
+		addWhereExpression(sql, parametros);
+		List<String> arguments = extractArguments(parametros);
 		
-//		Cursor cursor = getDataBase().rawQuery(sql.toString(), arguments.toArray(new String[arguments.size()]));
-		Cursor cursor = getDataBase().rawQuery(sql.toString(), null);
+		Cursor cursor = getDataBase().rawQuery(sql.toString(), arguments.toArray(new String[arguments.size()]));
 		
 		Map<Long, ProcessoMock> mapProcessos = new HashMap<Long, ProcessoMock>();
 		while (cursor.moveToNext()) {
@@ -121,9 +120,23 @@ public class ProcessoMockDAO extends JuriMobileDAO {
 		ProcessoMock processo = null;
 		while (cursor.moveToNext()) {
 			processo = parseToProcesso(cursor);
+			loadParticipantes(processo);
+			loadMovimentacoes(processo);
 		}
 		cursor.close();
 		return processo;
+	}
+
+	private void loadParticipantes(ProcessoMock processo) {
+		ProcessoParticipanteMockDAO participanteMockDAO = new ProcessoParticipanteMockDAO(getContext());
+		List<ProcessoParticipanteMock> participantes = participanteMockDAO.recuperaParticipantesCompleto(processo.getId());
+		processo.setParticipantes(participantes);
+	}
+	
+	private void loadMovimentacoes(ProcessoMock processo) {
+		ProcessoMovimentoMockDAO processoMovimentoMockDAO = new ProcessoMovimentoMockDAO(getContext());
+		List<ProcessoMovimentoMock> movimentos = processoMovimentoMockDAO.recuperaMovimentacoes(processo.getId());
+		processo.setMovimentacoes(movimentos);
 	}
 	
 }

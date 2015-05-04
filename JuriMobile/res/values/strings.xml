@@ -28,6 +28,8 @@
     <string name="configuracoes">Configurações</string>
     <string name="resultado">Resultado</string>
     <string name="descriptionFavoritar">Marcar procesos como favorito</string>
+    <string name="exibir">Exibir</string>
+    <string name="remover">Remover</string>
 	
     
 </resources>

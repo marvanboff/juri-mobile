@@ -25,7 +25,7 @@
 	descricao text,
 	id_processo integer references processo_mock(_id), 
 	cod_movimento_cnj integer references movimentos_cnj(cod_movimento), 
-	data_movimentacao2 text,
+	texto_ajuda text,
 	primary key(_id)
 	--constraint fk_movimento_cnj_proc_mov_mock foreign key (cod_movimento_cnj) references movimentos_cnj(cod_movimento),
 	--constraint fk_processo_movimento_mock foreign key (id_processo) references processo_mock(_id)
@@ -120,41 +120,41 @@
 	--constraint fk_participante_advogado foreign key (id_participante) references processo_participante_mock(_id)
    );
 
-Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('1','Acidente de Trânsito','Porto Alegre',date('06/04/15 21:50:21','DD/MM/RR HH24:MI:SS'),'90001590720148211001','Foro Regional do 4º Distrito','Aguardando Audiência');
+Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('1','Acidente de Trânsito','Porto Alegre','06/04/15 21:50:21','90001590720148211001','Foro Regional do 4º Distrito','Aguardando Audiência');
 Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('2','Conflito fundiário coletivo rural
-','Novo Hamburgo',date('06/04/15 22:06:39,099000000','DD/MM/RR HH24:MI:SS,FF'),'90001960720151021105','1ª Vara da Fazenda Pública do Foro Central','Distribúido');
-Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('3','Pagamento Indevido','São Leopoldo',date('06/04/15 22:09:43','DD/MM/RR HH24:MI:SS'),'90001880920140115585','4º Juizado Especial Cível','Verificar Providências');
+','Novo Hamburgo','06/04/15 22:06:39,099000000','90001960720151021105','1ª Vara da Fazenda Pública do Foro Central','Distribúido');
+Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('3','Pagamento Indevido','São Leopoldo','06/04/15 22:09:43','90001880920140115585','4º Juizado Especial Cível','Verificar Providências');
 
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('1',date('06/03/15 08:50:00','DD/MM/RR HH24:MI:SS'),'DISTRIBUÍDO POR SORTEIO','1','26',date('06/03/15 08:50:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('2',date('06/03/15 09:06:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Documentos de Identificação','1','581',date('06/03/15 09:06:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('3',date('06/03/15 09:09:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Boletim de Ocorrência','1','581',date('06/03/15 09:09:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('4',date('06/03/15 09:12:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Orçamento','1','581',date('06/03/15 09:12:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('5',date('06/03/15 09:20:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Orçamento','1','581',date('06/03/15 09:20:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('6',date('06/03/15 09:45:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Fotografia','1','581',date('06/03/15 09:45:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('7',date('06/03/15 09:55:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Documento de Propriedade do Veículo','1','581',date('06/03/15 09:55:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('8',date('06/03/15 13:05:00','DD/MM/RR HH24:MI:SS'),'AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 13/04/2015 18:30 2º Juizado Especial Cível','1','970',date('06/03/15 13:05:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('9',date('06/03/15 13:10:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ325648809BR','1','60',date('06/03/15 13:10:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('10',date('02/04/15 15:05:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR)','1','60',date('02/04/15 15:05:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('11',date('07/07/14 09:00:00','DD/MM/RR HH24:MI:SS'),'DISTRIBUÍDO POR SORTEIO','2','26',date('07/07/14 09:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('12',date('07/07/14 09:10:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Outros','2','581',date('07/07/14 09:10:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('13',date('07/07/14 09:30:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Petição','2','85',date('07/07/14 09:30:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('14',date('07/07/14 09:40:00','DD/MM/RR HH24:MI:SS'),'AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/08/2014 19:00 7º Juizado Especial Cível','2','970',date('07/07/14 09:40:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('15',date('07/07/14 10:00:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ345801932BR','2','60',date('07/07/14 10:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('16',date('07/07/14 10:22:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ233802080BR','2','60',date('07/07/14 10:22:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('17',date('16/07/14 10:35:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR)','2','60',date('16/07/14 10:35:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('18',date('27/07/14 10:50:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR)','2','60',date('27/07/14 10:50:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('19',date('08/08/14 13:00:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE PETICAO DE Apresentação de documentos','2','85',date('08/08/14 13:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('20',date('11/08/14 14:00:00','DD/MM/RR HH24:MI:SS'),'AUDIÊNCIA DE CONCILIACAO REALIZADA PARA 11/08/2014 19:24 7º Juizado Especial Cível','2','970',date('11/08/14 14:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('21',date('28/11/14 09:00:00','DD/MM/RR HH24:MI:SS'),'DISTRIBUÍDO POR SORTEIO','3','26',date('28/11/14 09:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('22',date('28/11/14 09:10:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Outros','3','581',date('28/11/14 09:10:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('23',date('28/11/14 09:30:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Petição','3','85',date('28/11/14 09:30:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('24',date('28/11/14 09:40:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Procuração','3','581',date('28/11/14 09:40:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('25',date('28/11/14 10:00:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Documentos de Identificação','3','581',date('28/11/14 10:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('26',date('28/11/14 10:22:00','DD/MM/RR HH24:MI:SS'),'AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/02/2015 18:30 10º Juizado Especial Cível','3','970',date('28/11/14 10:22:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('27',date('28/11/14 10:35:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ309840978BR','3','60',date('28/11/14 10:35:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('28',date('11/12/14 10:50:00','DD/MM/RR HH24:MI:SS'),'JUNTADA DE Aviso de Recebimento (AR)','3','581',date('11/12/14 10:50:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('29',date('07/04/15 09:00:00','DD/MM/RR HH24:MI:SS'),'AUDIÊNCIA DE INSTRUCAO E JULGAMENTO REALIZADA PARA 07/04/2015 14:30 10º Juizado Especial Cível','3','970',date('07/04/15 09:00:00','DD/MM/RR HH24:MI:SS'));
-Insert into processo_movimento_mock (_id,data_movimentacao,descricao,id_processo,cod_movimento_cnj,data_movimentacao2) values ('30',date('07/04/15 10:00:00','DD/MM/RR HH24:MI:SS'),'EXPEDIÇÃO DE Termo de Audiência','3','60',date('07/04/15 10:00:00','DD/MM/RR HH24:MI:SS'));
+INSERT INTO `processo_movimento_mock` VALUES (1, '15-03-06 08:50','DISTRIBUÍDO POR SORTEIO',1,26,'Indica a criação de um processo.'); 
+INSERT INTO `processo_movimento_mock` VALUES (2, '15-03-06 09:06','JUNTADA DE Documentos de Identificação',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (3, '15-03-06 09:09','JUNTADA DE Boletim de Ocorrência',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (4, '15-03-06 09:12','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (5, '15-03-06 09:20','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (6, '15-03-06 09:45','JUNTADA DE Fotografia',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (7, '15-03-06 09:55','JUNTADA DE Documento de Propriedade do Veículo',1,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (8, '15-03-06 13:05','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 13/04/2015 18:30 2º Juizado Especial Cível',1,970,'Indica que audiência está marcada para a data descrita.');
+INSERT INTO `processo_movimento_mock` VALUES (9, '15-03-06 13:10','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ325648809BR',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (10,'15-04-02 15:05','EXPEDIÇÃO DE Aviso de Recebimento (AR)',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (11,'14-07-07 09:00','DISTRIBUÍDO POR SORTEIO',2,26,'Criação do processo.');
+INSERT INTO `processo_movimento_mock` VALUES (12,'14-07-07 09:10','JUNTADA DE Outros',2,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (13,'14-07-07 09:30','JUNTADA DE Petição',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
+INSERT INTO `processo_movimento_mock` VALUES (14,'14-07-07 09:40','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/08/2014 19:00 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.');
+INSERT INTO `processo_movimento_mock` VALUES (15,'14-07-07 10:00','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ345801932BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (16,'14-07-07 10:22','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ233802080BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (17,'14-07-16 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (18,'14-07-27 10:50','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (19,'14-08-08 13:00','JUNTADA DE PETICAO DE Apresentação de documentos',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
+INSERT INTO `processo_movimento_mock` VALUES (20,'14-08-11 14:00','AUDIÊNCIA DE CONCILIACAO REALIZADA PARA 11/08/2014 19:24 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.');
+INSERT INTO `processo_movimento_mock` VALUES (21,'14-11-28 09:00','DISTRIBUÍDO POR SORTEIO',3,26,'Criação do processo.');
+INSERT INTO `processo_movimento_mock` VALUES (22,'14-11-28 09:10','JUNTADA DE Outros',3,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (23,'14-11-28 09:30','JUNTADA DE Petição',3,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
+INSERT INTO `processo_movimento_mock` VALUES (24,'14-11-28 09:40','JUNTADA DE Procuração',3,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (25,'14-11-28 10:00','JUNTADA DE Documentos de Identificação',3,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (26,'14-11-28 10:22','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/02/2015 18:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.');
+INSERT INTO `processo_movimento_mock` VALUES (27,'14-11-28 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ309840978BR',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (28,'14-12-11 10:50','JUNTADA DE Aviso de Recebimento (AR)',3,581,'Um novo documento foi anexado ao processo.');
+INSERT INTO `processo_movimento_mock` VALUES (29,'15-04-07 09:00','AUDIÊNCIA DE INSTRUCAO E JULGAMENTO REALIZADA PARA 07/04/2015 14:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.');
+INSERT INTO `processo_movimento_mock` VALUES (30,'15-04-07 10:00','EXPEDIÇÃO DE Termo de Audiência',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
 
 Insert into processo_participante_mock (_id,nome,tipo_participacao,tipo_participante,id_processo) values ('1','Tiago Sagio','Autor','A','1');
 Insert into processo_participante_mock (_id,nome,tipo_participacao,tipo_participante,id_processo) values ('2','Cecilia de Souza','Autor','A','1');

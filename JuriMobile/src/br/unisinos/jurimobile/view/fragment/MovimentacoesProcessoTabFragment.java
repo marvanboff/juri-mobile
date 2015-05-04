@@ -1,6 +1,9 @@
 package br.unisinos.jurimobile.view.fragment;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,15 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import br.unisinos.jurimobile.R;
-import br.unisinos.jurimobile.controller.ProcessoActivity;
-import br.unisinos.jurimobile.model.entity.ProcessoMovimento;
+import br.unisinos.jurimobile.model.entity2.Processo;
+import br.unisinos.jurimobile.model.entity2.ProcessoMovimento;
 
 public class MovimentacoesProcessoTabFragment extends Fragment {
 	
-	private Long idProcesso;
+	private Processo processo;
 
-	public MovimentacoesProcessoTabFragment(Long idProcesso) {
-		this.idProcesso = idProcesso;
+	public MovimentacoesProcessoTabFragment(Processo processo) {
+		this.processo = processo;
 	}
 
 	@Override
@@ -29,7 +32,7 @@ public class MovimentacoesProcessoTabFragment extends Fragment {
 //		EditText inputNome = (EditText) rootView.findViewById(R.id.inputNome);
 //		inputNome.getBackground().setColorFilter(primary, PorterDuff.Mode.SRC_IN);
 		
-		carregarMovimentacoes(contentTabView, ProcessoMovimento.getMockMovimentacao(false));
+		carregarMovimentacoes(contentTabView, processo.getMovimentacoes());
 		
 		return contentTabView;
 	}
@@ -40,10 +43,26 @@ public class MovimentacoesProcessoTabFragment extends Fragment {
 			String[] de = { "descricaoMovimento" };
 			int[] para = { R.id.descricaoMovimento};
 			
-			SimpleAdapter adapter = new SimpleAdapter(contentTabView.getContext(), ProcessoActivity.convertToMapMovimentos(mockMovimentacao), R.layout.movimentos, de, para);
+			SimpleAdapter adapter = new SimpleAdapter(contentTabView.getContext(), convertToMapMovimentos(mockMovimentacao), R.layout.movimentos, de, para);
 			ListView listView = (ListView) contentTabView.findViewById(R.id.movimentacoes);
 			listView.setAdapter(adapter);
 		
 	}
-
+	
+	public static List<Map<String, Object>> convertToMapMovimentos(List<ProcessoMovimento> movimentos){
+		List<Map<String, Object>> mapMovimentos = new ArrayList<Map<String, Object>>();
+		
+		for (ProcessoMovimento movimento : movimentos) {
+			addMap(movimento, mapMovimentos);
+		}
+		
+		return mapMovimentos;
+	}
+	
+	private static void addMap(ProcessoMovimento processoMovimento, List<Map<String, Object>> participantes) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("descricaoMovimento", processoMovimento.toString());
+		participantes.add(map);
+	}
+	
 }

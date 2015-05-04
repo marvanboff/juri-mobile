@@ -1,9 +1,11 @@
 package br.unisinos.jurimobile.model.entity2;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProcessoMovimento implements Auditavel {
 
+	
 	private Long id;
 	
 	private Date dataMovimentacao;
@@ -16,11 +18,12 @@ public class ProcessoMovimento implements Auditavel {
 	
 	private Long codigoMovimentoCNJ;
 	
-	private String glossario;
+	private String textoAjuda;
+	
 	
 	@Override
 	public String toString() {
-		return dataMovimentacao + " - " + descricao;
+		return new SimpleDateFormat("dd/MM/yyyy hh:mm").format(dataMovimentacao) + " - " + descricao;
 	}
 	
 	public Long getId() {
@@ -71,13 +74,12 @@ public class ProcessoMovimento implements Auditavel {
 		this.codigoMovimentoCNJ = codigoMovimentoCNJ;
 	}
 
-	public String getGlossario() {
-		return glossario;
+	public String getTextoAjuda() {
+		return textoAjuda;
 	}
 
-	public void setGlossario(String glossario) {
-		this.glossario = glossario;
+	public void setTextoAjuda(String textoAjuda) {
+		this.textoAjuda = textoAjuda;
 	}
-	
 	
 }

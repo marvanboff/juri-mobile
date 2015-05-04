@@ -1702,6 +1702,7 @@ containing a value of this type.
         public static final int end=0x7f050014;
         public static final int estadoProcesso=0x7f050059;
         public static final int estadoProcesso_tab=0x7f050040;
+        public static final int exibir=0x7f050063;
         public static final int expand_activities_button=0x7f050022;
         public static final int expanded_menu=0x7f050028;
         public static final int favorito=0x7f050049;
@@ -1743,6 +1744,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f05001c;
         public static final int progress_horizontal=0x7f05001d;
         public static final int radio=0x7f05002b;
+        public static final int remover=0x7f050064;
         public static final int resultado_pesquisa_processo_toolbar=0x7f05005e;
         public static final int search_badge=0x7f050035;
         public static final int search_bar=0x7f050034;
@@ -1848,6 +1850,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int navigation_menu=0x7f0d0000;
+        public static final int processo_context_menu=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1912,6 +1915,7 @@ containing a value of this type.
         public static final int drawerMenuTitle=0x7f0a0017;
         public static final int drawer_close=0x7f0a0012;
         public static final int drawer_open=0x7f0a0011;
+        public static final int exibir=0x7f0a0022;
         public static final int meusProcessos=0x7f0a0013;
         public static final int movimento=0x7f0a0016;
         public static final int nProcesso=0x7f0a001b;
@@ -1922,6 +1926,7 @@ containing a value of this type.
         public static final int pesquisar=0x7f0a001e;
         public static final int pesquisar_processo_por=0x7f0a0019;
         public static final int processo=0x7f0a0014;
+        public static final int remover=0x7f0a0023;
         public static final int resultado=0x7f0a0020;
         public static final int ultimas_movimentacoes=0x7f0a0015;
     }

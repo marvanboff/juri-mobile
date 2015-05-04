@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import br.unisinos.jurimobile.R;
+import br.unisinos.jurimobile.facade.JuriMobileFacadeImpl;
 import br.unisinos.jurimobile.model.entity.Grupo;
 import br.unisinos.jurimobile.model.entity.Processo;
 import br.unisinos.jurimobile.model.entity.ProcessoParticipante;
@@ -28,6 +29,21 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 	private Toolbar toolBar;
 	private NavigationDrawerFragment navigationDrawerFragment;
 	private RecyclerViewMeusProcessosFragment recyclerViewFragment;
+	
+	public enum ProcessoContextMenu{
+		
+		EXIBIR(1), REMOVER(2);
+		
+		private Integer groupID;
+		
+		private ProcessoContextMenu(Integer groupID){
+			this.groupID = groupID;
+		}
+
+		public Integer getGroupID() {
+			return groupID;
+		}
+	}
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -57,7 +73,6 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		toolBar.getMenu().removeItem(R.id.meus_processos_item_menu);
 	}
 
-
 	private void loadViewComponents() {
 		recyclerViewFragment = (RecyclerViewMeusProcessosFragment) getSupportFragmentManager().findFragmentById(R.id.lista_processo_recycler_view);
 		navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.grupos_processo_navigation_drawer);
@@ -86,6 +101,20 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 		Intent intent = new Intent(this, ProcessoMainActivity.class);
 		intent.putExtra(ProcessoMainActivity.NAME_PARAMETER_ID_PROCESSO, itemId);
 		startActivity(intent);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		
+		if(ProcessoContextMenu.EXIBIR.getGroupID().equals(item.getGroupId())){
+			
+		}else if(ProcessoContextMenu.REMOVER.getGroupID().equals(item.getGroupId())){
+			new JuriMobileFacadeImpl().desfavoritarProcesso(this, Long.valueOf(String.valueOf(item.getItemId())));
+			recyclerViewFragment.getView().invalidate();
+			recyclerViewFragment.realoadRecycler();
+		}
+		
+		return super.onContextItemSelected(item);
 	}
 	
 	public List<Processo> getMockProcessos(List<Processo> processos) {

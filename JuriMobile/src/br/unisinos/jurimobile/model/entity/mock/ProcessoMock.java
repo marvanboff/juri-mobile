@@ -9,10 +9,6 @@ public class ProcessoMock implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final String TABELA = "processo_mock";
-	public static final String _ID = "_id";
-	public static final String NUMERO = "numero";
-	
 	private Long id;
 
 	private String numero;
