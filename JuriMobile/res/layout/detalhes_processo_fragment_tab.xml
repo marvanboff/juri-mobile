@@ -14,28 +14,89 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/numeroProcesso_tab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/secundaryText"
-            android:textSize="18sp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/nProcesso"
+            android:theme="@style/textLabel" />
 
         <TextView
-            android:id="@+id/estadoProcesso_tab"
+            android:id="@+id/numeroProcesso"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="4dp"
+            android:layout_marginLeft="10dp"
+            android:theme="@style/textValue" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/orgaoJulgador"
+            android:theme="@style/textLabel" />
+
+        <TextView
+            android:id="@+id/orgaoJulgador"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:theme="@style/textValue" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/assunto"
+            android:theme="@style/textLabel" />
+
+        <TextView
+            android:id="@+id/assunto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:theme="@style/textValue" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/situacao"
+            android:theme="@style/textLabel" />
+
+        <TextView
+            android:id="@+id/situacaoProcesso"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/secundaryText" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="@color/subText" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/comarca"
+            android:theme="@style/textLabel" />
+
+        <TextView
+            android:id="@+id/comarca"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/secundaryText" />
+
+        <include layout="@layout/divider" />
 
         <ListView
-            android:id="@+id/lista_participantes_tab"
+            android:id="@+id/lista_participantes"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <include layout="@layout/divider" />
     </LinearLayout>
 
 </LinearLayout>

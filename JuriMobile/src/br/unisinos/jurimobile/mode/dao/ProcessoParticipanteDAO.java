@@ -20,9 +20,9 @@ public class ProcessoParticipanteDAO extends JuriMobileDAO {
 																	"participante.id_processo, participante.data_ult_atualizacao, participante_advogado._id, participante_advogado.id_participante, " +
 																	"participante_advogado.id_advogado, participante_advogado.data_ult_atualizacao, advogado._id, advogado.nome, " +
 																	"advogado.numero_oab, advogado.data_ult_atualizacao " + 
-																	"from processo_participante_advogado participante_advogado " + 
-																	"inner join advogado advogado on (participante_advogado._id = advogado._id) " +
-																	"inner join processo_participante participante on (participante._id = participante_advogado._id) " +
+																	"from processo_participante participante " + 
+																	"left outer join processo_participante_advogado participante_advogado on (participante._id = participante_advogado._id) " + 
+																	"left outer join advogado advogado on (participante_advogado._id = advogado._id) " +
 																	"where participante.id_processo =  ? ";
 	
 	public ProcessoParticipanteDAO(Context context) {
@@ -77,18 +77,24 @@ public class ProcessoParticipanteDAO extends JuriMobileDAO {
 	}
 	
 	private ProcessoParticipanteAdvogado parseToProcessoParticipanteAdvogado(ProcessoParticipante participante, Cursor cursor) {
-		ProcessoParticipanteAdvogado participanteAdvogado = new ProcessoParticipanteAdvogado();
-		Advogado advogado = new Advogado();
 		
-		participanteAdvogado.setId(cursor.getLong(5));
-		participanteAdvogado.setParticipante(participante);
-		participanteAdvogado.setAdvogado(advogado);
-		
-		advogado.setId(cursor.getLong(7));
-		advogado.setNome(cursor.getString(8));
-		advogado.setNumeroOAB(cursor.getString(9));
-		
-		return participanteAdvogado;
+		Long idParticipanteAdvogado = cursor.getLong(5);
+		if(idParticipanteAdvogado != null && idParticipanteAdvogado > 0){
+			ProcessoParticipanteAdvogado participanteAdvogado = new ProcessoParticipanteAdvogado();
+			Advogado advogado = new Advogado();
+			
+			participanteAdvogado.setId(idParticipanteAdvogado);
+			participanteAdvogado.setParticipante(participante);
+			participanteAdvogado.setAdvogado(advogado);
+			
+			advogado.setId(cursor.getLong(7));
+			advogado.setNome(cursor.getString(8));
+			advogado.setNumeroOAB(cursor.getString(9));
+			
+			return participanteAdvogado;
+			
+		}
+		return null;
 	}
 	
 	public ProcessoParticipante insert(ProcessoParticipante participante){

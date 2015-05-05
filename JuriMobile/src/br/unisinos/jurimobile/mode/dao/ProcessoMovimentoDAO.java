@@ -12,7 +12,7 @@ import br.unisinos.jurimobile.utils.DateUtils;
 
 public class ProcessoMovimentoDAO extends JuriMobileDAO {
 
-	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo from processo_movimento where id_processo = ?";
+	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo from processo_movimento where id_processo = ? order by data_movimentacao";
 	
 	private enum ProcessoMovimentoColumns{
 		

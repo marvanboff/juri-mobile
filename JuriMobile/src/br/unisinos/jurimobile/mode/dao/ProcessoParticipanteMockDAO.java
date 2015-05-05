@@ -19,9 +19,9 @@ public class ProcessoParticipanteMockDAO extends JuriMobileDAO {
 	private static final String QUERY_SEL_PARTICIPANTES_ADVOGADOS = "select participante._id, participante.nome, participante.tipo_participacao, participante.tipo_participante, " +
 																	"participante.id_processo, participante_advogado._id, participante_advogado.id_participante, " +
 																	"participante_advogado.id_advogado, advogado._id, advogado.nome, advogado.numero_oab " + 
-																	"from participante_advogado_mock participante_advogado " + 
-																	"inner join advogado_mock advogado on (participante_advogado.id_advogado = advogado._id) " +
-																	"inner join processo_participante_mock participante on (participante_advogado.id_participante = participante._id) " +
+																	"from processo_participante_mock participante " + 
+																	"left outer join participante_advogado_mock participante_advogado on (participante_advogado.id_participante = participante._id) " + 
+																	"left outer join advogado_mock advogado on (participante_advogado.id_advogado = advogado._id) " +
 																	"where participante.id_processo =  ? ";
 	
 	public ProcessoParticipanteMockDAO(Context context) {
@@ -76,24 +76,26 @@ public class ProcessoParticipanteMockDAO extends JuriMobileDAO {
 		participante.setTipoParticipacao(cursor.getString(2));
 		participante.setTipoParticipante(TipoParticipante.valueOf(cursor.getString(3)));
 		participante.setIdProcesso(cursor.getLong(4));
-		participante.setAdvogados(new ArrayList<ProcessoParticipanteAdvogadoMock>());
 		
 		return participante;
 	}
 
 	private ProcessoParticipanteAdvogadoMock parseToProcessoParticipanteAdvogado(Cursor cursor) {
-		ProcessoParticipanteAdvogadoMock participanteAdvogado = new ProcessoParticipanteAdvogadoMock();
-		AdvogadoMock advogado = new AdvogadoMock();
-		
-		participanteAdvogado.setId(cursor.getLong(5));
-		participanteAdvogado.setIdParticipante(cursor.getLong(6));
-		participanteAdvogado.setAdvogado(advogado);
-		
-		advogado.setId(cursor.getLong(7));
-		advogado.setNome(cursor.getString(8));
-		advogado.setNumeroOAB(cursor.getString(9));
-		
-		return participanteAdvogado;
+		Long idParticipanteAdvogado = cursor.getLong(5);
+		if(idParticipanteAdvogado != null && idParticipanteAdvogado > 0){
+			ProcessoParticipanteAdvogadoMock participanteAdvogado = new ProcessoParticipanteAdvogadoMock();
+			AdvogadoMock advogado = new AdvogadoMock();
+			
+			participanteAdvogado.setId(idParticipanteAdvogado);
+			participanteAdvogado.setIdParticipante(cursor.getLong(6));
+			participanteAdvogado.setAdvogado(advogado);
+			
+			advogado.setId(cursor.getLong(7));
+			advogado.setNome(cursor.getString(8));
+			advogado.setNumeroOAB(cursor.getString(9));
+			return participanteAdvogado;
+		}
+		return null;
 	}
 	
 	

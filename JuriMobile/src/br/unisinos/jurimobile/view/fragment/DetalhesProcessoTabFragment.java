@@ -1,6 +1,7 @@
 package br.unisinos.jurimobile.view.fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,16 +15,25 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import br.unisinos.jurimobile.R;
+import br.unisinos.jurimobile.controller.ProcessoMainActivity;
 import br.unisinos.jurimobile.model.entity2.Processo;
 import br.unisinos.jurimobile.model.entity2.ProcessoParticipante;
 
 public class DetalhesProcessoTabFragment extends Fragment {
 
 	private Processo processo;
-
-	private TextView numeroProcesso;
-	private TextView estadoProcesso;
+	
+	private TextView numero;
+	private TextView assunto;
+	private TextView situacao;
+	private TextView comarca;
+	private TextView orgaoJulgador;
+	
 	private ListView listParticipantes;
+	
+	public DetalhesProcessoTabFragment(){
+		
+	}
 	
 	public DetalhesProcessoTabFragment(Processo processo) {
 		this.processo = processo;
@@ -37,6 +47,9 @@ public class DetalhesProcessoTabFragment extends Fragment {
 //		EditText inputNumeroProcesso = (EditText) rootView.findViewById(R.id.inputNumeroProcesso);
 //		inputNumeroProcesso.getBackground().setColorFilter(primary, PorterDuff.Mode.SRC_IN);
 		
+		if(processo == null){
+			processo = ((ProcessoMainActivity)getActivity()).getProcesso();
+		}
 		carregarProcesso(contentTabView);
 		
 		return contentTabView;
@@ -44,10 +57,17 @@ public class DetalhesProcessoTabFragment extends Fragment {
 	
 	public void carregarProcesso(View contentTabView){
 		
-		numeroProcesso = (TextView) contentTabView.findViewById(R.id.numeroProcesso_tab);
-		estadoProcesso = (TextView) contentTabView.findViewById(R.id.estadoProcesso_tab);
-		numeroProcesso.setText(processo.getNumero());
-		estadoProcesso.setText(processo.getSituacao());
+		numero = (TextView) contentTabView.findViewById(R.id.numeroProcesso);
+		orgaoJulgador = (TextView) contentTabView.findViewById(R.id.orgaoJulgador);
+		assunto = (TextView) contentTabView.findViewById(R.id.assunto);
+		situacao = (TextView) contentTabView.findViewById(R.id.situacaoProcesso);
+		comarca = (TextView) contentTabView.findViewById(R.id.comarca);
+		
+		numero.setText(processo.getNumero());
+		orgaoJulgador.setText(processo.getOrgaoJulgador());
+		assunto.setText(processo.getAssunto());
+		situacao.setText(processo.getSituacao());
+		comarca.setText(processo.getComarca());
 		
 		loadListParticipantes(contentTabView, processo);
 		
@@ -58,12 +78,14 @@ public class DetalhesProcessoTabFragment extends Fragment {
 		int[] para = { R.id.nomeParticipante, R.id.tipoParticipacao };
 
 		SimpleAdapter adapter = new SimpleAdapter(contentTabView.getContext(), convertToMapParticipantes(processo.getParticipantes()), R.layout.participantes, de, para);
-		listParticipantes = (ListView) contentTabView.findViewById(R.id.lista_participantes_tab);
+		listParticipantes = (ListView) contentTabView.findViewById(R.id.lista_participantes);
 		listParticipantes.setAdapter(adapter);
 	}
 	
 	public static List<Map<String, Object>> convertToMapParticipantes(List<ProcessoParticipante> participantes){
 		List<Map<String, Object>> mapParticipantes = new ArrayList<Map<String, Object>>();
+		
+		Collections.sort(participantes);
 		
 		for (ProcessoParticipante participante : participantes) {
 			addMap(participante, mapParticipantes);

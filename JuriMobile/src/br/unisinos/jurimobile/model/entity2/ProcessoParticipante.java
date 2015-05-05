@@ -6,7 +6,7 @@ import java.util.List;
 
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
 
-public class ProcessoParticipante implements Auditavel {
+public class ProcessoParticipante implements Auditavel, Comparable<ProcessoParticipante> {
 
 	private Long id;
 
@@ -37,7 +37,10 @@ public class ProcessoParticipante implements Auditavel {
 		if(advogados == null){
 			advogados = new ArrayList<ProcessoParticipanteAdvogado>();
 		}
-		return advogados.add(advogado);
+		if(advogado != null){
+			return advogados.add(advogado);
+		}
+		return false;
 	}
 	
 	public List<ProcessoParticipanteAdvogado> getAdvogados() {
@@ -94,6 +97,14 @@ public class ProcessoParticipante implements Auditavel {
 
 	public void setDataUltAtualizacao(Date dataUltAtualizacao) {
 		this.dataUltAtualizacao = dataUltAtualizacao;
+	}
+
+	@Override
+	public int compareTo(ProcessoParticipante participante) {
+		if(this.getTipoParticipante().ordinal() == participante.getTipoParticipante().ordinal()){
+			return getId().compareTo(participante.getId()); 
+		}
+		return Integer.valueOf(this.getTipoParticipante().ordinal()).compareTo(participante.getTipoParticipante().ordinal());
 	}
 
 }

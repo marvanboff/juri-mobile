@@ -9,9 +9,12 @@
         android:id="@+id/descricaoMovimento"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
         android:textColor="@color/secundaryText"
-        android:textSize="16sp" 
+        android:textSize="15sp" 
         android:padding="4dp"
+        android:gravity="center_vertical"
+        android:minHeight="50sp"
         />
 
 </LinearLayout>

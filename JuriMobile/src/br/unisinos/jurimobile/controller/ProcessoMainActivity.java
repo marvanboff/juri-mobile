@@ -23,6 +23,7 @@ public class ProcessoMainActivity extends FragmentActivity {
 	
 	private ViewPager mViewPager;
 	private SlidingTabLayout mSlidingTabLayout;
+	private Processo processo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,10 @@ public class ProcessoMainActivity extends FragmentActivity {
 		setContentView(R.layout.processo_main_activity);
 		
 		Long idProcesso = this.getIntent().getExtras().getLong(NAME_PARAMETER_ID_PROCESSO);
+		processo = recuperarProcesso(idProcesso);
 		
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(new TabProcessoAdapter(getSupportFragmentManager(), recuperarProcesso(idProcesso)));
+        mViewPager.setAdapter(new TabProcessoAdapter(getSupportFragmentManager(), processo));
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         
         mSlidingTabLayout.setCustomTabView(R.layout.processo_tabs, R.id.tabModel); 
@@ -62,7 +64,7 @@ public class ProcessoMainActivity extends FragmentActivity {
 			});
 		}
 	}
-
+	
 	private Processo recuperarProcesso(Long idProcesso) {
 		return new JuriMobileFacadeImpl().recuperarProcesso(this, idProcesso);
 	}
@@ -93,6 +95,10 @@ public class ProcessoMainActivity extends FragmentActivity {
 			return getResources().getColor(R.color.indicadorColor);
 		}
 		
+	}
+
+	public Processo getProcesso() {
+		return processo;
 	}
 	
 }

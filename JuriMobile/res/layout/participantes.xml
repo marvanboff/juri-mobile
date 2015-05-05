@@ -6,17 +6,18 @@
 
     <TextView
         android:id="@+id/tipoParticipacao"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/subText"
-        android:layout_marginTop="20dp"
-        android:textSize="16sp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:theme="@style/textLabel" />
 
     <TextView
         android:id="@+id/nomeParticipante"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/secundaryText"
-        android:textSize="20sp" />
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:theme="@style/textValue" />
+    
 </LinearLayout>

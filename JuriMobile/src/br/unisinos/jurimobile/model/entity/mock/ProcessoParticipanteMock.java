@@ -50,7 +50,10 @@ public class ProcessoParticipanteMock implements Serializable {
 		if(advogados == null){
 			advogados = new ArrayList<ProcessoParticipanteAdvogadoMock>();
 		}
-		return advogados.add(advogadoMock);
+		if(advogadoMock != null){
+			return advogados.add(advogadoMock);
+		}
+		return false;
 	}
 	
 	public List<ProcessoParticipanteAdvogadoMock> getAdvogados() {
