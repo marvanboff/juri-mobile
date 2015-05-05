@@ -1691,7 +1691,6 @@ containing a value of this type.
         public static final int checkbox=0x7f050029;
         public static final int collapseActionView=0x7f05000f;
         public static final int comarca=0x7f050043;
-        public static final int configuracoes_item_menu=0x7f050061;
         public static final int content_frame=0x7f05004d;
         public static final int content_frame_drawer=0x7f050050;
         public static final int decor_content_parent=0x7f05002f;
@@ -1702,7 +1701,7 @@ containing a value of this type.
         public static final int dropdown=0x7f050011;
         public static final int edit_query=0x7f050033;
         public static final int end=0x7f050014;
-        public static final int exibir=0x7f050062;
+        public static final int exibir=0x7f050061;
         public static final int expand_activities_button=0x7f050022;
         public static final int expanded_menu=0x7f050028;
         public static final int favorito=0x7f05004b;
@@ -1743,7 +1742,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f05001c;
         public static final int progress_horizontal=0x7f05001d;
         public static final int radio=0x7f05002b;
-        public static final int remover=0x7f050063;
+        public static final int remover=0x7f050062;
         public static final int resultado_pesquisa_processo_toolbar=0x7f05005d;
         public static final int search_badge=0x7f050035;
         public static final int search_bar=0x7f050034;
@@ -1942,9 +1941,6 @@ containing a value of this type.
     
          */
         public static final int AppTheme=0x7f0b00f8;
-        /** 
-        <item name="android:background">@color/background</item>
-         */
         public static final int AppTheme_Base=0x7f0b00f9;
         public static final int Base_Animation_AppCompat_DropDownUp=0x7f0b00df;
         public static final int Base_TextAppearance_AppCompat=0x7f0b00a3;
@@ -2107,6 +2103,7 @@ containing a value of this type.
  <item name="android:homeAsUpIndicator">@drawable/abc_ic_ab_back_mtrl_am_alpha</item> 
          */
         public static final int DrawerArrowStyle=0x7f0b00fb;
+        public static final int OverflowMenu=0x7f0b0100;
         public static final int PagerTabStripText=0x7f0b00fc;
         public static final int Platform_AppCompat=0x7f0b00d5;
         public static final int Platform_AppCompat_Dialog=0x7f0b00d7;

@@ -24,8 +24,9 @@
         
         <item name="android:buttonStyle">@style/ButtonAppTheme</item>
         
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>
-
+	
 	<style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
@@ -36,4 +37,11 @@
         <item name="android:background">@drawable/material_button</item>
     </style>
 
+     <style name="OverflowMenu" parent="Base.Widget.AppCompat.Light.PopupMenu.Overflow">
+        <!-- Required for pre-Lollipop. -->
+        <item name="overlapAnchor">false</item>
+        <!-- Required for Lollipop. -->
+        <item name="android:overlapAnchor">false</item>
+    </style>
+    
 </resources>

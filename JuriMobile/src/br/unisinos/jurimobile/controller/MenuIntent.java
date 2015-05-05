@@ -16,9 +16,9 @@ public class MenuIntent {
 		case R.id.pesquisa_processo_item_menu:
 			intentResolved = new Intent(context, PesquisaProcessoActivity.class);
 			break;
-		case R.id.configuracoes_item_menu:
+		/*case R.id.configuracoes_item_menu:
 			intentResolved = new Intent(context, ProcessoListActivity.class);
-			break;
+			break;*/
 		}
 
 		return intentResolved;
