@@ -106,9 +106,15 @@ public class ResultadoPesquisaProcessoAdapter extends RecyclerView.Adapter<Recyc
 		ProcessoMock processo = processos.get(position);
 		RecyclerViewHolder recycleHolder = (RecyclerViewHolder) holder;
 		recycleHolder.getNumeroProcesso().setText(processo.getNumero());
-		recycleHolder.getParticipantes().setText(processo.getNomesParticipantes());
+		recycleHolder.getParticipantes().setText(montarListaNomesParticipantes(processo));
 		//abc_btn_rating_star_off_mtrl_alpha.png
 //		recycleHolder.getFavorito().setImageDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+	}
+
+	private String montarListaNomesParticipantes(ProcessoMock processo) {
+		
+		
+		return processo.getNomesParticipantes();
 	}
 
 	@Override

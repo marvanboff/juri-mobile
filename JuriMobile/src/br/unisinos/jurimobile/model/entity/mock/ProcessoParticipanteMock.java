@@ -6,7 +6,7 @@ import java.util.List;
 
 import br.unisinos.jurimobile.model.entity.TipoParticipante;
 
-public class ProcessoParticipanteMock implements Serializable {
+public class ProcessoParticipanteMock implements Serializable, Comparable<ProcessoParticipanteMock> {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -54,6 +54,14 @@ public class ProcessoParticipanteMock implements Serializable {
 			return advogados.add(advogadoMock);
 		}
 		return false;
+	}
+	
+	@Override
+	public int compareTo(ProcessoParticipanteMock participante) {
+		if(this.getTipoParticipante().ordinal() == participante.getTipoParticipante().ordinal()){
+			return getId().compareTo(participante.getId()); 
+		}
+		return Integer.valueOf(this.getTipoParticipante().ordinal()).compareTo(participante.getTipoParticipante().ordinal());
 	}
 	
 	public List<ProcessoParticipanteAdvogadoMock> getAdvogados() {
