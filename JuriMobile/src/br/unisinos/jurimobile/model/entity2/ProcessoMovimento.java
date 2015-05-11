@@ -20,6 +20,7 @@ public class ProcessoMovimento implements Auditavel {
 	
 	private String textoAjuda;
 	
+	private String descricaoCNJ;
 	
 	@Override
 	public String toString() {
@@ -81,5 +82,12 @@ public class ProcessoMovimento implements Auditavel {
 	public void setTextoAjuda(String textoAjuda) {
 		this.textoAjuda = textoAjuda;
 	}
-	
+
+	public String getDescricaoCNJ() {
+		return descricaoCNJ;
+	}
+
+	public void setDescricaoCNJ(String descricaoCNJ) {
+		this.descricaoCNJ = descricaoCNJ;
+	}
 }

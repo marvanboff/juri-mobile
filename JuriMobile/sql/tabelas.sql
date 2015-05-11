@@ -81,6 +81,7 @@
 	descricao text, 
 	texto_ajuda text,
 	cod_movimento_cnj integer,
+	descricao_cnj text,
 	id_processo integer references processo(_id)
    ) ;
 

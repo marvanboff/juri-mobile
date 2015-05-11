@@ -178,9 +178,9 @@ public class ProcessoListActivity extends ActionBarActivity implements ClickList
 	public static List<Grupo> getGruposMock() {
 		Grupo todos = new Grupo(null, "Todos");
 		Grupo g1 = new Grupo(1l, "Reparação de Danos");
-		Grupo g2 = new Grupo(2l, "Dr. Francisco");
+		Grupo g2 = new Grupo(2l, "Acidente de Trânsito");
 		Grupo g3 = new Grupo(3l, "Recorrer");
-		Grupo g4 = new Grupo(4l, "Recurso Pendente");
+		Grupo g4 = new Grupo(4l, "Aguardando Audiência");
 		Grupo g5 = new Grupo(5l, "Em Prazo");
 		
 		List<Grupo> grupos = new ArrayList<Grupo>();

@@ -71,10 +71,13 @@ public class MovimentacoesProcessoTabFragment extends Fragment {
 	}
 	
 	private void createAlertDialog(int position) {
-		String textoAjuda = processo.getMovimentacoes().get(position).getTextoAjuda();
+		ProcessoMovimento processoMovimento = processo.getMovimentacoes().get(position);
+		String textoAjuda = processoMovimento.getTextoAjuda();
+		String descricaoCNJ = processoMovimento.getDescricaoCNJ();
+		
 		if(textoAjuda != null){
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle(R.string.textoAjuda);
+			builder.setTitle(descricaoCNJ);
 			builder.setMessage(textoAjuda);
 			
 			builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

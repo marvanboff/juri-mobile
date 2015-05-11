@@ -18,6 +18,8 @@ public class ProcessoMovimentoMock {
 	
 	private String textoAjuda;
 
+	private String descricaoCNJ;
+	
 	@Override
 	public String toString() {
 		return dataMovimentacao + " - " + descricao;
@@ -69,6 +71,14 @@ public class ProcessoMovimentoMock {
 
 	public void setTextoAjuda(String textoAjuda) {
 		this.textoAjuda = textoAjuda;
+	}
+
+	public String getDescricaoCNJ() {
+		return descricaoCNJ;
+	}
+
+	public void setDescricaoCNJ(String descricaoCNJ) {
+		this.descricaoCNJ = descricaoCNJ;
 	}
 	
 

@@ -26,6 +26,7 @@
 	id_processo integer references processo_mock(_id), 
 	cod_movimento_cnj integer references movimentos_cnj(cod_movimento), 
 	texto_ajuda text,
+	descricao_cnj text,
 	primary key(_id)
 	--constraint fk_movimento_cnj_proc_mov_mock foreign key (cod_movimento_cnj) references movimentos_cnj(cod_movimento),
 	--constraint fk_processo_movimento_mock foreign key (id_processo) references processo_mock(_id)
@@ -125,36 +126,37 @@ Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_ju
 ','Novo Hamburgo','06/04/15 22:06:39,099000000','90001960720151021105','1ª Vara da Fazenda Pública do Foro Central','Distribúido');
 Insert into processo_mock (_id,assunto,comarca,data_distribuicao,numero,orgao_julgador,situacao) values ('3','Pagamento Indevido','São Leopoldo','06/04/15 22:09:43','90001880920140115585','4º Juizado Especial Cível','Verificar Providências');
 
-INSERT INTO `processo_movimento_mock` VALUES (1, '15-03-06 08:50','DISTRIBUÍDO POR SORTEIO',1,26,'Indica a criação de um processo.'); 
-INSERT INTO `processo_movimento_mock` VALUES (2, '15-03-06 09:06','JUNTADA DE Documentos de Identificação',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (3, '15-03-06 09:09','JUNTADA DE Boletim de Ocorrência',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (4, '15-03-06 09:12','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (5, '15-03-06 09:20','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (6, '15-03-06 09:45','JUNTADA DE Fotografia',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (7, '15-03-06 09:55','JUNTADA DE Documento de Propriedade do Veículo',1,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (8, '15-03-06 13:05','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 13/04/2015 18:30 2º Juizado Especial Cível',1,970,'Indica que audiência está marcada para a data descrita.');
-INSERT INTO `processo_movimento_mock` VALUES (9, '15-03-06 13:10','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ325648809BR',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (10,'15-04-02 15:05','EXPEDIÇÃO DE Aviso de Recebimento (AR)',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (11,'14-07-07 09:00','DISTRIBUÍDO POR SORTEIO',2,26,'Criação do processo.');
-INSERT INTO `processo_movimento_mock` VALUES (12,'14-07-07 09:10','JUNTADA DE Outros',2,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (13,'14-07-07 09:30','JUNTADA DE Petição',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
-INSERT INTO `processo_movimento_mock` VALUES (14,'14-07-07 09:40','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/08/2014 19:00 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.');
-INSERT INTO `processo_movimento_mock` VALUES (15,'14-07-07 10:00','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ345801932BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (16,'14-07-07 10:22','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ233802080BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (17,'14-07-16 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (18,'14-07-27 10:50','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (19,'14-08-08 13:00','JUNTADA DE PETICAO DE Apresentação de documentos',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
-INSERT INTO `processo_movimento_mock` VALUES (20,'14-08-11 14:00','AUDIÊNCIA DE CONCILIACAO REALIZADA PARA 11/08/2014 19:24 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.');
-INSERT INTO `processo_movimento_mock` VALUES (21,'14-11-28 09:00','DISTRIBUÍDO POR SORTEIO',3,26,'Criação do processo.');
-INSERT INTO `processo_movimento_mock` VALUES (22,'14-11-28 09:10','JUNTADA DE Outros',3,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (23,'14-11-28 09:30','JUNTADA DE Petição',3,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.');
-INSERT INTO `processo_movimento_mock` VALUES (24,'14-11-28 09:40','JUNTADA DE Procuração',3,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (25,'14-11-28 10:00','JUNTADA DE Documentos de Identificação',3,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (26,'14-11-28 10:22','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/02/2015 18:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.');
-INSERT INTO `processo_movimento_mock` VALUES (27,'14-11-28 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ309840978BR',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
-INSERT INTO `processo_movimento_mock` VALUES (28,'14-12-11 10:50','JUNTADA DE Aviso de Recebimento (AR)',3,581,'Um novo documento foi anexado ao processo.');
-INSERT INTO `processo_movimento_mock` VALUES (29,'15-04-07 09:00','AUDIÊNCIA DE INSTRUCAO E JULGAMENTO REALIZADA PARA 07/04/2015 14:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.');
-INSERT INTO `processo_movimento_mock` VALUES (30,'15-04-07 10:00','EXPEDIÇÃO DE Termo de Audiência',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.');
+INSERT INTO `processo_movimento_mock` VALUES (1,'15-03-06 08:50','DISTRIBUÍDO POR SORTEIO',1,26,'Indica a criação de um processo.','Distibuído por');
+INSERT INTO `processo_movimento_mock` VALUES (2,'15-03-06 09:06','JUNTADA DE Documentos de Identificação',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (3,'15-03-06 09:09','JUNTADA DE Boletim de Ocorrência',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (4,'15-03-06 09:12','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (5,'15-03-06 09:20','JUNTADA DE Orçamento',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (6,'15-03-06 09:45','JUNTADA DE Fotografia',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (7,'15-03-06 09:55','JUNTADA DE Documento de Propriedade do Veículo',1,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (8,'15-03-06 13:05','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 13/04/2015 18:30 2º Juizado Especial Cível',1,970,'Indica que audiência está marcada para a data descrita.','Audiência');
+INSERT INTO `processo_movimento_mock` VALUES (9,'15-03-06 13:10','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ325648809BR',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento
+');
+INSERT INTO `processo_movimento_mock` VALUES (10,'15-04-02 15:05','EXPEDIÇÃO DE Aviso de Recebimento (AR)',1,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (11,'14-07-07 09:00','DISTRIBUÍDO POR SORTEIO',2,26,'Criação do processo.','Distibuído por');
+INSERT INTO `processo_movimento_mock` VALUES (12,'14-07-07 09:10','JUNTADA DE Outros',2,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (13,'14-07-07 09:30','JUNTADA DE Petição',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.','Juntada de Petição');
+INSERT INTO `processo_movimento_mock` VALUES (14,'14-07-07 09:40','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/08/2014 19:00 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.','Audiência');
+INSERT INTO `processo_movimento_mock` VALUES (15,'14-07-07 10:00','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ345801932BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (16,'14-07-07 10:22','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ233802080BR',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (17,'14-07-16 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (18,'14-07-27 10:50','EXPEDIÇÃO DE Aviso de Recebimento (AR)',2,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (19,'14-08-08 13:00','JUNTADA DE PETICAO DE Apresentação de documentos',2,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.','Juntada de Petição');
+INSERT INTO `processo_movimento_mock` VALUES (20,'14-08-11 14:00','AUDIÊNCIA DE CONCILIACAO REALIZADA PARA 11/08/2014 19:24 7º Juizado Especial Cível',2,970,'Indica que audiência está marcada para a data descrita.','Audiência');
+INSERT INTO `processo_movimento_mock` VALUES (21,'14-11-28 09:00','DISTRIBUÍDO POR SORTEIO',3,26,'Criação do processo.','Distibuído por');
+INSERT INTO `processo_movimento_mock` VALUES (22,'14-11-28 09:10','JUNTADA DE Outros',3,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (23,'14-11-28 09:30','JUNTADA DE Petição',3,85,'Indica que foi realizado um pedido oficial relacionado ao seu processo. As petições geralmente são documento oficiais assinados.','Juntada de Petição');
+INSERT INTO `processo_movimento_mock` VALUES (24,'14-11-28 09:40','JUNTADA DE Procuração',3,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (25,'14-11-28 10:00','JUNTADA DE Documentos de Identificação',3,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (26,'14-11-28 10:22','AUDIÊNCIA DE CONCILIACAO DESIGNADA PARA 11/02/2015 18:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.','Audiência');
+INSERT INTO `processo_movimento_mock` VALUES (27,'14-11-28 10:35','EXPEDIÇÃO DE Aviso de Recebimento (AR) - Citação - Protocolo JJ309840978BR',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
+INSERT INTO `processo_movimento_mock` VALUES (28,'14-12-11 10:50','JUNTADA DE Aviso de Recebimento (AR)',3,581,'Um novo documento foi anexado ao processo.','Juntada de Documento');
+INSERT INTO `processo_movimento_mock` VALUES (29,'15-04-07 09:00','AUDIÊNCIA DE INSTRUCAO E JULGAMENTO REALIZADA PARA 07/04/2015 14:30 10º Juizado Especial Cível',3,970,'Indica que audiência está marcada para a data descrita.','Audiência');
+INSERT INTO `processo_movimento_mock` VALUES (30,'15-04-07 10:00','EXPEDIÇÃO DE Termo de Audiência',3,60,'Informa que o tribunal emitiu um documento e anexou a seu processo.','Expedição de documento');
 
 Insert into processo_participante_mock (_id,nome,tipo_participacao,tipo_participante,id_processo) values ('1','Tiago Sagio','Autor','A','1');
 Insert into processo_participante_mock (_id,nome,tipo_participacao,tipo_participante,id_processo) values ('2','Cecilia de Souza','Autor','A','1');

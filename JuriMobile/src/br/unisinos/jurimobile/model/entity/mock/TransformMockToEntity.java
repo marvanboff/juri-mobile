@@ -48,6 +48,7 @@ public class TransformMockToEntity {
 		movimento.setDescricao(mock.getDescricao());
 		movimento.setCodigoMovimentoCNJ(mock.getCodMovimentoCNJ());
 		movimento.setTextoAjuda(mock.getTextoAjuda());
+		movimento.setDescricaoCNJ(mock.getDescricaoCNJ());
 
 		return movimento;
 	}

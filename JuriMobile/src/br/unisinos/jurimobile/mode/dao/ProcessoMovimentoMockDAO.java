@@ -10,11 +10,11 @@ import br.unisinos.jurimobile.utils.DateUtils;
 
 public class ProcessoMovimentoMockDAO extends JuriMobileDAO {
 
-	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, descricao, id_processo, cod_movimento_cnj, texto_ajuda from processo_movimento_mock where id_processo = ?";
+	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, descricao, id_processo, cod_movimento_cnj, texto_ajuda, descricao_cnj from processo_movimento_mock where id_processo = ?";
 	
 	private enum ProcessoMovimentoMockColumns {
 
-		_id, data_movimentacao, descricao, id_processo, cod_movimento_cnj, texto_ajuda;
+		_id, data_movimentacao, descricao, id_processo, cod_movimento_cnj, texto_ajuda, descricao_cnj;
 
 		public static String getTableName() {
 			return "processo_movimento_mock";
@@ -39,6 +39,7 @@ public class ProcessoMovimentoMockDAO extends JuriMobileDAO {
 			movimentoMock.setIdProcesso(cursor.getLong(3));
 			movimentoMock.setCodMovimentoCNJ(cursor.getLong(4));
 			movimentoMock.setTextoAjuda(cursor.getString(5));
+			movimentoMock.setDescricaoCNJ(cursor.getString(6));
 			
 			movimentos.add(movimentoMock);
 		}

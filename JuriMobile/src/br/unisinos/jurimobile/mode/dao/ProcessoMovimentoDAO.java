@@ -12,11 +12,11 @@ import br.unisinos.jurimobile.utils.DateUtils;
 
 public class ProcessoMovimentoDAO extends JuriMobileDAO {
 
-	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo from processo_movimento where id_processo = ? order by data_movimentacao";
+	private static final String QUERY_SEL_MOVIMENTACOES = "select _id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo, descricao_cnj from processo_movimento where id_processo = ? order by data_movimentacao";
 	
 	private enum ProcessoMovimentoColumns{
 		
-		_id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo;
+		_id, data_movimentacao, data_ult_atualizacao, descricao, texto_ajuda, cod_movimento_cnj, id_processo, descricao_cnj;
 		
 		public static String getTableName() {
 			return "processo_movimento";
@@ -41,6 +41,7 @@ public class ProcessoMovimentoDAO extends JuriMobileDAO {
 			movimento.setDescricao(cursor.getString(3));
 			movimento.setTextoAjuda(cursor.getString(4));
 			movimento.setCodigoMovimentoCNJ(cursor.getLong(5));
+			movimento.setDescricaoCNJ(cursor.getString(7));
 			movimento.setProcesso(processo);
 			
 			movimentos.add(movimento);
@@ -58,6 +59,7 @@ public class ProcessoMovimentoDAO extends JuriMobileDAO {
 		values.put(ProcessoMovimentoColumns.descricao.name(), movimento.getDescricao());
 		values.put(ProcessoMovimentoColumns.texto_ajuda.name(), movimento.getTextoAjuda());
 		values.put(ProcessoMovimentoColumns.cod_movimento_cnj.name(), movimento.getCodigoMovimentoCNJ());
+		values.put(ProcessoMovimentoColumns.descricao_cnj.name(), movimento.getDescricaoCNJ());
 		values.put(ProcessoMovimentoColumns.id_processo.name(), movimento.getProcesso().getId());
 
 		Long idProcessoMovimento = getDataBaseWrite().insert(ProcessoMovimentoColumns.getTableName(), null, values);
