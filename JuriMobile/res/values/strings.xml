@@ -30,6 +30,7 @@
     <string name="descriptionFavoritar">Marcar procesos como favorito</string>
     <string name="exibir">Exibir</string>
     <string name="remover">Remover</string>
+    <string name="removerAcompanhamento">Remover Acompanhamento</string>
     <string name="textoAjuda">Ajuda</string>
     <string name="orgaoJulgador">Orgão Julgador</string>
     <string name="assunto">Assunto</string>

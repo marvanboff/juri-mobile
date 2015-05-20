@@ -1907,8 +1907,8 @@ containing a value of this type.
          */
         public static final int abc_toolbar_collapse_description=0x7f0a0004;
         public static final int app_name=0x7f0a0010;
-        public static final int assunto=0x7f0a0026;
-        public static final int comarca=0x7f0a0028;
+        public static final int assunto=0x7f0a0027;
+        public static final int comarca=0x7f0a0029;
         public static final int configuracoes=0x7f0a001f;
         public static final int descriptionFavoritar=0x7f0a0021;
         public static final int drawerMenuTitle=0x7f0a0017;
@@ -1921,15 +1921,16 @@ containing a value of this type.
         public static final int nome=0x7f0a001a;
         public static final int nomeAutorReu=0x7f0a001c;
         public static final int numeroProcesso=0x7f0a001d;
-        public static final int orgaoJulgador=0x7f0a0025;
+        public static final int orgaoJulgador=0x7f0a0026;
         public static final int pesquisa_processo=0x7f0a0018;
         public static final int pesquisar=0x7f0a001e;
         public static final int pesquisar_processo_por=0x7f0a0019;
         public static final int processo=0x7f0a0014;
         public static final int remover=0x7f0a0023;
+        public static final int removerAcompanhamento=0x7f0a0024;
         public static final int resultado=0x7f0a0020;
-        public static final int situacao=0x7f0a0027;
-        public static final int textoAjuda=0x7f0a0024;
+        public static final int situacao=0x7f0a0028;
+        public static final int textoAjuda=0x7f0a0025;
         public static final int ultimas_movimentacoes=0x7f0a0015;
     }
     public static final class style {

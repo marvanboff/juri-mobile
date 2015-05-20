@@ -62,7 +62,7 @@ public class PesquisaProcessoActivity extends FragmentActivity {
 			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					onBackPressed();
+					startActivity(new Intent(v.getContext(), ProcessoListActivity.class));
 				}
 			});
 		}

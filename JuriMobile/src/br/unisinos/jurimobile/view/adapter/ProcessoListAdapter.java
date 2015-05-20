@@ -58,8 +58,8 @@ public class ProcessoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 		public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 //			v.inflate(v.getContext(), R.menu.processo_context_menu, null);
 			
-			menu.add(ProcessoContextMenu.EXIBIR.getGroupID(), 1, Menu.NONE, R.string.exibir);
-			menu.add(ProcessoContextMenu.REMOVER.getGroupID(), Integer.valueOf(String.valueOf(getItemId())), Menu.NONE, R.string.remover);
+//			menu.add(ProcessoContextMenu.EXIBIR.getGroupID(), 1, Menu.NONE, R.string.exibir);
+			menu.add(ProcessoContextMenu.REMOVER.getGroupID(), Integer.valueOf(String.valueOf(getItemId())), Menu.NONE, R.string.removerAcompanhamento);
 			
 			
 		}
